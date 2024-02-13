@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            background-size: cover;
+            font-family: sans-serif;
+        }
+        th, td {
+            border: 1px solid black;
+            width: 75px;
+            height: 75px;
+            padding: 5px;
+            text-align: center;
+            font-size: 150%;
+        }
+        #calednar{
+            margin: 200px;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    </head>
+    <body>
+        <div id="calendar"></div>
+        <script>
+            let day, month, year;
+              do
+              {  const date = prompt("Enter the date yyyy/mm/dd") ;
+                const datePattern = /^\d{4}\/\d{2}\/\d{2}$/;
+                if (datePattern.test(date)) {
+                     year = date[0]+ date[1]+date[2]+date[3]
+                     month = date[5]+ date[6]
+                     day = date[8]+date[9]
+
+                    let parsedyear = parseInt(year);
+                    let parsedmonth = parseInt(month);
+                    let parsedday = parseInt(day);
+                    if(parsedyear > 0 && parsedyear<9999){
+                        if(parsedmonth >0 && parsedmonth <13){
+                            if(parsedday >0 && parsedday <31){
+                                break;
+                            }
+                        }
+                    }
+                } 
+                else {
+                    alert("Неверный формат даты. Введите дату в формате yyyy/mm/dd.");
+                }
+              
+                }while(true)
+                generateCalendar(day,month,year)
+        
+        function generateCalendar(day,month, year) {
+            const daysInMonth = new Date(year, month , 0).getDate();
+            const firstDayOfWeek = new Date(year, month-1, 1).getDay();
+        
+            const calendarDiv = document.getElementById("calendar");
+            calendarDiv.innerHTML = "";
+        
+            const table = document.createElement("table");
+            const headerRow = document.createElement("tr");
+        
+            const weekdays = [ "Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            for (const weekday of weekdays) {
+                const th = document.createElement("th");
+                th.textContent = weekday;
+                headerRow.appendChild(th);
+            }
+
+            table.appendChild(headerRow);
+
+            const table1 = document.createElement("table");
+            let dayCounter = 1;
+            for (let i = 0; i < 6; i++) {
+                const row = document.createElement("tr");
+                let hasDate = false;
+                for (let j = 0; j < 7; j++) {
+                    const cell = document.createElement("td");
+                    if (i === 0 && j < firstDayOfWeek) {
+                        cell.textContent = "";
+                    } else if (dayCounter > daysInMonth) {
+                        cell.textContent = "";
+                    } else {
+                        cell.textContent = dayCounter++;
+                        hasDate = true;
+                    }
+                    row.appendChild(cell);
+                }
+                if(hasDate) table1.appendChild(row);
+            }
+        
+            calendarDiv.appendChild(table);
+            calendarDiv.appendChild(table1);
+            let seasons = ["seasons/1.JPG","seasons/2.JPG","seasons/3.JPG","seasons/4.JPG"]
+            if(month == "01" || month =="02"|| month =="12"){
+                table.style.backgroundColor = 'blue';
+                table1.style.backgroundImage = `url(${seasons[0]})`
+                table.style.color = 'white';
+                table1.style.color = 'black';
+            }
+            if(month == "03" || month =="04"|| month =="05"){
+                table.style.backgroundColor = 'yellow';
+                table1.style.backgroundImage = `url(${seasons[1]})`
+                table.style.color = 'black';
+                table1.style.color = 'black';
+            }
+            if(month == "06" || month =="07"|| month =="08"){
+                table.style.backgroundColor = 'green';
+                table1.style.backgroundImage = `url(${seasons[2]})`
+                table.style.color = 'beige';
+                table1.style.color = 'beige';
+            }
+            if(month == "09" || month =="10"|| month =="11"){
+                table.style.backgroundColor = 'orange';
+                table1.style.backgroundImage = `url(${seasons[3]})`
+                table.style.color = 'dimgrey';
+                table1.style.color = 'beige';
+            }
+        }
+        </script>
+    
+    </body>
+</html>
