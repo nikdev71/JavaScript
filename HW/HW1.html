@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let name1, state, age, email
+        // do{
+        //     name1 = prompt("Введите ФИО:")
+        //     state = prompt("Введите пол:")
+        //     age = prompt("Введите возраст:")
+        //     email = prompt("Введите email:")
+        // }while(!confirm("Все верно?:\nФИО: "+ name1+"\nПол: "+state+"\nВозраст: "+age+"\nEmail: "+email))
+        // alert("Ваши данные:\nФИО: "+ name1+"\nПол: "+state+"\nВозраст: "+age+"\nEmail: "+email)
+
+
+        // do{
+        //     let ticket = prompt("Введите номер билета трамвая")
+        //     if(ticket.length !== 6 || isNaN(ticket))
+        //     {
+        //         alert("Такого билета не существует")
+        //         continue;
+        //     }
+        //     let part1=0, part2 = 0
+        //     for (let index = 0; index < ticket.length; index++) {
+        //         if(index <3)
+        //         part1 += parseInt(ticket[index])
+        //         else
+        //         part2+=parseInt(ticket[index])
+        //     }
+        //     if(part1 === part2)
+        //     {
+        //         alert("Ваш билет счастливый")
+        //     }
+        //     else{
+        //         alert("Ваш билет не счастливый")
+        //     }
+        // }while(confirm("Повторить попытку?"))
+
+        alert("Загадайте число от 1 до 100")
+        let numbers = []
+        for (let index = 1; index <= 100; index++) {
+            numbers.push(index);
+        }
+        let left = 0, right = numbers.length;
+        while (left <= right) 
+        {
+            let middle = Math.floor((left + right) / 2);
+            
+            if (confirm("Ваше число больше " + middle)) {
+                left = middle + 1;
+            } else {
+                right = middle - 1;
+            }
+        }
+        alert("Ваше число: " + left);
+    </script>
+</body>
+</html>

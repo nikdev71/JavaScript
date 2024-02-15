@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        do
+        {
+            alert("Викторина")
+            let questions = [
+                [
+                    "Мадрид столица испании?",
+                    1
+                ],
+                [
+                    "Белок на английском - protein?",
+                    1
+                ],
+                [
+                    "Есть ли в космосе воздух?",
+                    0
+                ],
+                [
+                    "Символом США является лось?",
+                    0
+                ],
+                [
+                    "Химический элемент с символом \"H\" - это водород?",
+                    1
+                ],
+                [
+                    "Самый большой океан по площади - это Индийский океан?",
+                    0
+                ],
+                [
+                    "Началом нового тысячелетия считается год 2000?",
+                    0
+                ],
+                [
+                    "Наибольшая планета в Солнечной системе - это Юпитер?",
+                    1
+                ],
+                [
+                    "Первый полнометражный анимационный фильм, выпущенный Диснеем, называется \"Золушка\"?",
+                    0
+                ],
+                [
+                    "В ряду римских цифр \"X\" это 10 ?",
+                    1   
+                ]
+            ]
+            let answers = []
+            for (const i in questions) {
+                let answ = confirm(`${questions[i][0]}`)
+                if(answ == questions[i][1])
+                {
+                    answers.push(true)
+                }
+                else{
+                    answers.push(false)
+                }
+            }
+            alert(answers)
+        }while(confirm("Повторить викторину?"))
+
+
+
+
+        do{
+            let regex = /^[a-zA-Z\s]+$/;
+            let fio=prompt("Введите свое ФИО")
+            if(fio=="")
+            {
+                alert("Ваше имя неккоректно")
+                continue;
+            }
+            if(!regex.test(fio)){
+                alert("В имени есть недопустимые символы")
+            }
+            else{
+                alert("Ваше имя корректно")
+            }
+        }while(confirm("Повторить?"))
+
+
+
+
+        do{
+            let addr = prompt("Введите адресную строку");
+            if(!addr.startsWith("http"))
+            {
+                alert("Неккоректная строка")
+                continue;
+            }
+            let protidx = addr.indexOf(":");
+            let protocol = addr.slice(0,protidx+1);
+
+            let hostidx = addr.indexOf("//");
+            addr = addr.slice(hostidx+2);
+            hostidx = addr.indexOf("/");
+            let host = addr.slice(0,hostidx);
+            addr = addr.slice(hostidx);
+
+            let pathidx = addr.indexOf("?")
+            let path = addr.slice(0,pathidx);
+            if(pathidx !== -1) addr = addr.slice(pathidx+1);
+            else addr = "";
+
+            alert("Protocol - "+ protocol+ "\nHost - "+host+"\nPath - "+ path+"\nParams - "+ addr)
+        }while(confirm("Повторить?"))
+        
+
+
+
+
+
+        for(let i = 0; i<8; i++)
+         {    
+                if(i%2===0)
+                {
+                        if(i!==0)document.write('<div style="width: 100px; border: 1px solid grey; height: 100px; background-color: #C0C0C0; "></div>');
+                        for(let i = 0; i<8; i++)
+                        {    
+                            if(i%2===0)
+                                document.write('<div style="width: 100px; border: 1px solid grey; height: 100px; background-color: #FFD700; float:left;  "></div>');
+                            else 
+                                document.write('<div style="width: 100px; border: 1px solid grey; height: 100px; background-color: #C0C0C0; float:left; "></div>');
+                        }
+                }
+                else 
+                {
+                    document.write('<div style="width: 100px; border: 1px solid grey; height: 100px; background-color: #FFD700;  "></div>');
+                    for(let i = 0; i<8; i++)
+                        {    
+                            if(i%2===0)
+                             document.write('<div style="width: 100px; border: 1px solid grey; height: 100px; background-color: #C0C0C0; float:left; "></div>');
+                            else 
+                             document.write('<div style="width: 100px; border: 1px solid grey; height: 100px; background-color: #FFD700; float:left;  "></div>');
+                        }
+                }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+        ul li{
+            list-style-position: inside;
+            font-weight: 400;
+        }
+        ul li:hover{
+            cursor: pointer;
+        }
+        .boldli{
+            font-weight: 600;
+        }
+        #list2{
+            background-color: beige ;
+            list-style-position: inside;
+        }
+        #list2 li{
+            line-height: 25px;
+            user-select: none;
+            transition: background-color 0.3s ease;
+        }
+        #list2 li:hover{
+            cursor: pointer;
+        }
+        #textarea{
+            border: 1px solid grey;
+            width: 500px;
+            padding: 1%;
+            position: relative;
+            overflow: hidden;
+            outline: none;
+        }
+        #textarea #triangle{
+            background-color: grey;
+            width: 20px;
+            height: 20px;
+            rotate: 45deg;
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <ul id="list">
+        <li id="li1">This PC
+            <ul id="ul1" style="display: none;">
+                <li id="li2">Local Disk (D):
+                    <ul id="ul2" style="display: none;">
+                        <li>Program files</li>
+                        <li>Users</li>
+                        <li>Windows</li>
+                    </ul>
+                </li>
+                <li id="li3">Local Disk (D):
+                    <ul id="ul3" style="display: none;">
+                        <li>Folder 1</li>
+                        <li>Folder 2</li>
+                        <li>Folder 3</li>
+                    </ul>
+                </li>
+                <li id="li4">Local Disk (E):
+                    <ul id="ul4" style="display: none;">
+                        <li>Folder 1</li>
+                        <li>Folder 2</li>
+                        <li>Folder 3</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul> 
+
+    <ol id="list2">
+        <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus possimus dolor necessitatibus quam delectus quae cumque reprehenderit natus blanditiis. Voluptatum sint delectus nemo magnam dignissimos aspernatur deserunt voluptates, corrupti esse?</li>
+        <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus possimus dolor necessitatibus quam delectus quae cumque reprehenderit natus blanditiis. Voluptatum sint delectus nemo magnam dignissimos aspernatur deserunt voluptates, corrupti esse?</li>
+        <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus possimus dolor necessitatibus quam delectus quae cumque reprehenderit natus blanditiis. Voluptatum sint delectus nemo magnam dignissimos aspernatur deserunt voluptates, corrupti esse?</li>
+        <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus possimus dolor necessitatibus quam delectus quae cumque reprehenderit natus blanditiis. Voluptatum sint delectus nemo magnam dignissimos aspernatur deserunt voluptates, corrupti esse?</li>
+        <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus possimus dolor necessitatibus quam delectus quae cumque reprehenderit natus blanditiis. Voluptatum sint delectus nemo magnam dignissimos aspernatur deserunt voluptates, corrupti esse?</li>
+        <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus possimus dolor necessitatibus quam delectus quae cumque reprehenderit natus blanditiis. Voluptatum sint delectus nemo magnam dignissimos aspernatur deserunt voluptates, corrupti esse?</li>
+        <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus possimus dolor necessitatibus quam delectus quae cumque reprehenderit natus blanditiis. Voluptatum sint delectus nemo magnam dignissimos aspernatur deserunt voluptates, corrupti esse?</li>
+
+    </ol>
+
+    <div id="textarea" contenteditable="true">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam eius sapiente provident cupiditate, sequi porro similique officiis delectus minima dignissimos velit excepturi, quasi nesciunt, suscipit nam modi. Quidem, repellendus fugiat.
+        <div id="triangle"></div>
+    </div>
+    <script>
+        function OpenClose(e){
+            let targetid = e.currentTarget.id;
+            let ul = document.getElementById("ul" + targetid.slice(2))
+            if(ul.style.display == "none"){
+                ul.style.display = "block";
+            }
+            else ul.style.display = "none"; 
+            e.stopPropagation();
+        }
+        for(i = 1; i<5; i++)
+        {
+            let li = document.getElementById("li"+i);
+            li.addEventListener("click", OpenClose);
+        }
+
+
+        const list = document.getElementById('list');
+        list.addEventListener('mouseover', function(e) {
+            if (e.target.tagName === 'LI') {
+                e.target.classList.add('boldli');
+            }
+        });
+
+        list.addEventListener('mouseout', function(e) {
+            if (e.target.tagName === 'LI') {
+                e.target.classList.remove('boldli');
+            }
+        });
+        
+        //Вариант с выделением и поверхностных папок
+        // const listli = document.querySelectorAll('ul > li');
+        // listli.forEach(item =>{
+        //     item.addEventListener("mouseover", function (){
+        //         this.classList.add("boldli");
+        //     });
+        //     item.addEventListener("mouseout", function (){
+        //         this.classList.remove("boldli");
+        //     });
+        // })
+    </script>  
+    <script>
+        
+        let ls = document.getElementById("list2");
+        let lastSelectedLi = null; 
+
+        ls.addEventListener("click", function(e) {
+            if (e.ctrlKey ) { 
+                toggleSelection(e.target);
+            } else if (e.shiftKey && lastSelectedLi) { 
+                selectRange(e.target, lastSelectedLi);
+            } else { 
+                clearSelection();
+                toggleSelection(e.target);
+                lastSelectedLi = e.target;
+            }
+        });
+
+        function clearSelection() {
+            let allLi = ls.getElementsByTagName("li");
+            for (let i = 0; i < allLi.length; i++) {
+                allLi[i].style.backgroundColor = "beige";
+                allLi[i].style.color = "black";
+            }
+        }
+
+        function toggleSelection(targetLi) {
+            if (targetLi.tagName === 'LI') {
+                if (targetLi.style.backgroundColor === "purple") {
+                    targetLi.style.backgroundColor = "beige";
+                    targetLi.style.color = "black";
+                } else {
+                    targetLi.style.backgroundColor = "purple";
+                    targetLi.style.color = "beige";
+                }
+            }
+        }
+
+        function selectRange(targetLi, lastLi) {
+            let allLi = ls.getElementsByTagName("li");
+            let targetIndex = Array.from(allLi).indexOf(targetLi);
+            let lastIndex = Array.from(allLi).indexOf(lastLi);
+            let start = Math.min(targetIndex, lastIndex);
+            let end = Math.max(targetIndex, lastIndex);
+            clearSelection();
+            for (let i = start; i <= end; i++) {
+                allLi[i].style.backgroundColor = "purple";
+                allLi[i].style.color = "beige";
+            }
+        }
+    </script>
+    <script>
+        let triangle = document.getElementById("triangle");
+        let area = document.getElementById("textarea");
+        let resizing = false;
+
+        triangle.addEventListener("mousedown", function(e){
+            resizing = true;
+        });
+        
+        document.addEventListener("mousemove", function(e){
+            if(resizing){
+                area.style.width = (e.clientX - area.getBoundingClientRect().left -30) + "px";
+                area.style.height = (e.clientY - area.getBoundingClientRect().top -30) + "px";
+                area.style.border = "2px solid aquamarine"
+            }    
+        });
+
+        document.addEventListener("mouseup", function(e){
+            resizing = false;
+            area.style.border = "1px solid grey"
+        });
+    </script>
+</body>
+</html>

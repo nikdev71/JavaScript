@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <Style>
+        div{
+            display: flex;
+            margin:  10% 30%;
+            width: 100%;
+        }
+        
+    </Style>
+</head>
+<body>
+    <div >
+        <img src="clock/1.gif" alt="" id="hour1">
+        <img src="clock/1.gif" alt="" id="hour2">
+        <img src="clock/points.gif" alt="">
+        <img src="clock/1.gif" alt="" id="min1">
+        <img src="clock/1.gif" alt="" id="min2">
+        <img src="clock/points.gif" alt="">
+        <img src="clock/1.gif" alt="" id ="sec1">
+        <img src="clock/1.gif" alt="" id ="sec2">
+    </div>
+    <script>
+        let digits = new Array("clock/0.gif","clock/1.gif","clock/2.gif","clock/3.gif","clock/4.gif","clock/5.gif","clock/6.gif","clock/7.gif","clock/8.gif","clock/9.gif");
+        setInterval("clocks()", 1000);
+        function clocks()
+        {   
+            let now = new Date();
+                let hour = now.getHours();
+                if (hour < 10) {
+                    document.images["hour1"].src = digits[0];
+                    document.images["hour2"].src = digits[hour];
+                } else {
+                    let hour2 = hour % 10;
+                    let hour1 = Math.floor(hour / 10);
+                    document.images["hour1"].src = digits[hour1];
+                    document.images["hour2"].src = digits[hour2];
+                }
+
+                let min = now.getMinutes();
+                if (min < 10) {
+                    document.images["min1"].src = digits[0];
+                    document.images["min2"].src = digits[min];
+                } else {
+                    let min2 = min % 10;
+                    let min1 = Math.floor(min / 10);
+                    document.images["min1"].src = digits[min1];
+                    document.images["min2"].src = digits[min2];
+                }
+
+                let sec = now.getSeconds();
+                if (sec < 10) {
+                    document.images["sec1"].src = digits[0];
+                    document.images["sec2"].src = digits[sec];
+                } else {
+                    let sec2 = sec % 10;
+                    let sec1 = Math.floor(sec / 10);
+                    document.images["sec1"].src = digits[sec1];
+                    document.images["sec2"].src = digits[sec2];
+                }
+        }
+
+    </script>
+</body>
+</html>
