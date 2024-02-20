@@ -1,0 +1,72 @@
+﻿<html>
+
+<head>
+  <title>Заголовок</title>
+</head>
+
+<body>
+  <h1>Заголовок</h1>
+  <p id="paragraph">Абзац</p>
+  <pre>
+            #include &lt;iostream&gt; 
+            using namespace std;
+            void main() 
+            {
+                cout << "Hello, world!";
+            }
+</pre>
+  <ul>
+    <li>Элемент внешнего списка №1</li>
+    <li>Элемент внешнего списка №2
+      <ul id="ul-2">
+        <li>Элемент вложенного списка №2.1</li>
+        <li>Элемент вложенного списка №2.2</li>
+        <li>Элемент вложенного списка №2.3</li>
+      </ul>
+    </li>
+    <li>Элемент внешнего списка №3</li>
+    <li>Элемент внешнего списка №4</li>
+  </ul>
+
+  <button onclick="f1()">Example 1</button>
+  <button onclick="f2()">Example 2</button>
+  <button onclick="f3()">Example 3</button>
+  <button onclick="f4()">Example 4</button>
+  <button onclick="f5()">Example 5</button>
+  <button onclick="f6()">Example 6</button>
+  <button onclick="f7()">Example 7</button>
+
+  <script>
+
+    function f1() {
+      document.getElementById('ul-2').parentNode.style.color = 'blue';
+    }
+
+    function f2() {
+      alert(document.getElementById('paragraph').previousSibling.tagName);
+    }
+
+    function f3() {
+      document.getElementById('paragraph').nextSibling.nextSibling.style.color = 'red';
+    }
+
+    function f4() {
+      alert(document.getElementById('ul-2').parentNode.nextSibling.nextSibling.innerText);
+    }
+
+    function f5() {
+      alert(document.getElementById('ul-2').previousSibling.nodeValue);
+    }
+
+    function f6() {
+      alert(document.documentElement.tagName);
+    }
+
+    function f7() {
+      alert(document.getElementById('ul-2').childNodes.length);
+    }
+
+  </script>
+</body>
+
+</html>

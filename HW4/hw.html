@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            margin: 5% 2%;
+            font-size: 18px;
+            font-family: sans-serif;
+            width: 470px;
+            position: relative;
+        }
+        form input{
+            margin-top: 0.5%;
+        }
+        form input[type="text"]{
+           position: absolute;
+           right: 0;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <input type="radio" id="Addli" name="operation">Добавить элемент к конец списка<input type="text" id="text1"><br>
+        <input type="radio" id="AddInPos" name="operation">Вставить элемент спика<input type="text" id="text2" ><br>
+        <input type="radio" id="TextChange" name="operation">Изменить текст элемента списка<input type="text" id="text3"><br>
+        <input type="radio" id="AddNestedList" name="operation">Добавить вложенный список<input type="text" id="text4"><br>
+        <input type="radio" id="RemoveItem" name="operation">Удалить элемент списка<br>
+        <input id="btn" type="button" value="Добавить новый список">
+    </form>
+    <script>
+       function NewList(){
+            let list = document.createElement("ul")
+            let li = document.createElement("li")
+            li.textContent = "Example";
+            list.appendChild(li)
+            document.body.appendChild(list);
+            li.addEventListener("click", listItemAction);
+        }
+
+        function listItemAction(e) {
+            let radios = document.getElementsByName('operation');
+            let selectedRadio;
+            for (let i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    selectedRadio = radios[i];
+                    break;
+                }
+            }
+            
+            if (selectedRadio) {
+                if (selectedRadio.id === 'TextChange') {
+                    let text3 = document.getElementById('text3').value;
+                    this.textContent = text3;
+                } else if (selectedRadio.id === 'Addli') {
+                    let newItem = document.createElement("li");
+                    newItem.textContent = document.getElementById('text1').value;
+                    newItem.addEventListener("click",listItemAction);
+                    this.parentNode.appendChild(newItem);
+                }
+                 else if (selectedRadio.id === 'AddInPos') {
+                    let newItem = document.createElement("li");
+                    newItem.textContent = document.getElementById('text2').value;
+                    newItem.addEventListener("click",listItemAction);
+                    let parent = this.parentNode;
+                    parent.insertBefore(newItem, this); 
+                }
+                else if (selectedRadio.id === 'AddNestedList') {
+                    var nestedList = document.createElement("ul");
+                    var nestedListItem = document.createElement("li");
+                    nestedListItem.textContent = document.getElementById('text4').value;
+                    nestedList.appendChild(nestedListItem);
+                    nestedListItem.addEventListener("click", listItemAction); 
+                    e.target.appendChild(nestedList); 
+                    e.stopPropagation();
+                }
+                else if (selectedRadio.id === 'RemoveItem') {
+                    var parent = e.target.parentNode;
+                    parent.removeChild(e.target); 
+                }
+            }
+        }
+    
+
+        btn.addEventListener("click", NewList);
+    </script>
+</body>
+</html>

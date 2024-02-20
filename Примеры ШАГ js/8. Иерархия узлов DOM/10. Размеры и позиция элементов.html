@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Размеры и позиция элементов</title>
+  <style>
+    #rect {
+      width: 100px;
+      height: 100px;
+      background: #50c878;
+      border: 3px solid silver;
+    }
+  </style>
+</head>
+
+<body style="margin: 0; padding: 0;">
+  <div id="rect"></div>
+  <script>
+    let rect = document.getElementById("rect");
+    document.write("offsetHeight: " + rect.offsetHeight + "<br />");
+    document.write("offsetWidth: " + rect.offsetWidth + "<br />");
+    document.write("clientHeight: " + rect.clientHeight + "<br />");
+    document.write("clientWidth: " + rect.clientWidth + "<br />");
+
+    let clientRect = rect.getBoundingClientRect();
+    document.write("top: " + parseInt(clientRect.top) + "<br />");
+    document.write("bottom: " + parseInt(clientRect.bottom) + "<br />");
+    document.write("left: " + parseInt(clientRect.left) + "<br />");
+    document.write("right: " + parseInt(clientRect.right) + "<br />");
+  </script>
+</body>
+
+</html>

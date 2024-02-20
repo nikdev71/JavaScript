@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Объект document. Поиск элементов</title>
+</head>
+
+<body>
+  <div class="article">
+    <h3 id="header">Заголовок статьи</h3>
+    <p class="text">Первый абзац</p>
+    <p class="text">Второй абзац</p>
+  </div>
+  <div class="annotation">
+    <p>Аннотация статьи</p>
+  </div>
+  <div class="text">
+    <p>Первый абзац</p>
+    <p>Второй абзац</p>
+  </div>
+
+  <script>
+    let header = document.getElementById("header");
+    document.write(header.innerText + "<br/>");
+    let pElements = document.getElementsByTagName("p");
+
+    for (let i = 0; i < pElements.length; i++) {
+      document.write("Текст параграфа: " + pElements[i].innerText + "<br/>");
+    }
+
+    let articleDiv = document.getElementsByClassName("article")[0];
+    document.write(articleDiv + "<br/>");
+    let textElems = document.getElementsByClassName("text");
+    for (let i = 0; i < textElems.length; i++) {
+      document.write(textElems[i] + "<br/>");
+    }
+
+    let elem = document.querySelector(".article h3");
+    document.write("Текст селектора: " + elem.innerText + "<br/>");
+
+    let elems = document.querySelectorAll(".text p");
+
+    for (let i = 0; i < elems.length; i++) {
+      document.write(
+        "Текст селектора " + i + ": " + elems[i].innerText + "<br/>"
+      );
+    }
+  </script>
+</body>
+
+</html>
