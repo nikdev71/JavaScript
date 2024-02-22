@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background: beige;
+            font-family: sans-serif;
+        }
+        #nameContainer{
+            margin: 5% 37%;
+        }
+        #nameContainer input{
+            width: 100%;
+            margin: 5% 0 0 -5%;
+            outline: 1px solid brown;
+        }
+        #cmbox{
+            width: 700px;
+            border: 1px solid black;
+            background-color: burlywood;
+            display: flex;
+            flex-direction: column;
+            font-size: 18px;
+        }
+        .elem{
+            border: 1px solid black;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+        }
+        .expand{
+            background-color: antiquewhite;
+            padding-left: 20px;
+            border: 1px solid black;
+            display: none;
+        }
+        #txtarea{
+            width: 400px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 600px;
+            margin: 5% 0;
+        }
+        th, td {
+            border: 1px solid grey;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            cursor: pointer;
+            background-color: blanchedalmond;
+        }
+        tr:nth-child(even) {
+            background-color: blanchedalmond;
+        }
+        
+        th:hover {
+            background-color: rgb(247, 220, 184);
+        }
+    </style>
+</head>
+<body>
+    <div id="nameContainer">
+        <h2>Enter your name (can't content digits)</h2>
+        <input type="text" id="inp">
+    </div>
+
+    <div id="cmbox">
+        <div class="elem" id="elem1">What is Loem ipsum?</div>
+        <div class="expand">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit laboriosam fugiat expedita perspiciatis provident aspernatur, fugit vitae sit voluptates consequatur qui dignissimos sapiente explicabo illo ut rem illum accusamus veritatis.</div>
+        <div class="elem" id="elem2">Why do we use it?</div>
+        <div class="expand">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit laboriosam fugiat expedita perspiciatis provident aspernatur, fugit vitae sit voluptates consequatur qui dignissimos sapiente explicabo illo ut rem illum accusamus veritatis.</div>
+        <div class="elem" id="elem3">Where does it come from?</div>
+        <div class="expand">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit laboriosam fugiat expedita perspiciatis provident aspernatur, fugit vitae sit voluptates consequatur qui dignissimos sapiente explicabo illo ut rem illum accusamus veritatis.</div>
+        <div class="elem" id="elem4">Where can i get some?</div>
+        <div class="expand">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit laboriosam fugiat expedita perspiciatis provident aspernatur, fugit vitae sit voluptates consequatur qui dignissimos sapiente explicabo illo ut rem illum accusamus veritatis.</div>
+
+    </div>
+
+    <br>
+    <br>
+    <h4>Ctrl + R for edit text</h4>
+    <h4>Ctrl + G for save text</h4>
+    <hr style="width: 200px; float: left;"><br>
+    <div id="txtarea">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur rem odio voluptatum, ex deleniti molestiae porro facilis illum expedita, dignissimos dolorem, sapiente earum ipsam asperiores quasi. Labore numquam aliquam eius.</p>
+    </div>
+
+    <table id="tbl">
+            <tr>
+                <th onclick="sortTable(0)">Name</th>
+                <th onclick="sortTable(1)">Age</th>
+                <th onclick="sortTable(2)">Country</th>
+            </tr>
+            <tr>
+                <td>John</td>
+                <td>25</td>
+                <td>USA</td>
+            </tr>
+            <tr>
+                <td>Alice</td>
+                <td>30</td>
+                <td>UK</td>
+            </tr>
+            <tr>
+                <td>Bob</td>
+                <td>20</td>
+                <td>Canada</td>
+            </tr>
+            <tr>
+                <td>Eve</td>
+                <td>35</td>
+                <td>Australia</td>
+            </tr>
+    </table>
+    <script>
+        let inp = document.getElementById("inp")
+        inp.addEventListener("keydown", (e)=>{
+            if(isDigit(e.keyCode))
+            {
+                e.preventDefault();
+            }
+        })
+        function isDigit(keyCode) {
+        return keyCode >= 48 && keyCode <= 57; 
+        }
+
+        const flag= true;
+        let elems = document.querySelectorAll(".elem");
+        elems.forEach((e) => {
+            e.addEventListener("click", () => {
+                let nextElement = e.nextElementSibling;
+                let exp = document.querySelectorAll(".expand")
+                for(let i=0; i< exp.length; i++){
+                    if(exp[i].style.display ==="block")
+                    {
+                        exp[i].style.display = 'none';
+                        if(exp[i] == nextElement)
+                        {
+                            flag = false;
+                        }
+                    }
+                }
+                if (flag) {
+                    nextElement.style.display = (nextElement.style.display === 'block') ? 'none' : 'block';
+                }
+            });
+        });
+    </script>
+
+<script>
+    function toggleEditMode() {
+        let txtarea = document.getElementById("txtarea");
+        let oldNode = txtarea.querySelector("p");
+
+        let width = oldNode.offsetWidth;
+        let height = oldNode.offsetHeight;
+
+        let newNode = document.createElement("textarea");
+        newNode.textContent = oldNode.textContent;
+
+        newNode.style.width = width + "px";
+        newNode.style.height = height + "px";
+
+        txtarea.replaceChild(newNode, oldNode);
+    }
+    // let txtarea = document.getElementById("txtarea");
+    // txtarea.outerHTML = '<textarea></textarea>' //можно через outerHTML
+    document.addEventListener("keydown", function (event) {
+        if (event.ctrlKey && event.key === "r") {
+            event.preventDefault(); 
+            toggleEditMode();
+            
+        } else if (event.ctrlKey && event.key === "g") {
+            event.preventDefault(); 
+            saveContent(); 
+        }
+    });
+
+    function saveContent() {
+        let txtarea = document.getElementById("txtarea");
+        let oldNode = txtarea.querySelector("textarea");
+
+        let width = oldNode.offsetWidth;
+        let height = oldNode.offsetHeight;
+
+        let newNode = document.createElement("p");
+        newNode.textContent = oldNode.value;
+
+        newNode.style.width = width + "px";
+        newNode.style.height = height + "px";
+
+        txtarea.replaceChild(newNode, oldNode);
+    }
+
+
+    function sortTable(columnIndex) {
+        let table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("tbl");
+        switching = true;
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("td")[columnIndex];
+                y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+                if (isNaN(x.innerHTML) || isNaN(y.innerHTML)) {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else {
+                    if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    }
+</script>
+</body>
+</html>

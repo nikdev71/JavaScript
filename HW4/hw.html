@@ -54,6 +54,7 @@
                 if (selectedRadio.id === 'TextChange') {
                     let text3 = document.getElementById('text3').value;
                     this.textContent = text3;
+                    e.stopPropagation();
                 } else if (selectedRadio.id === 'Addli') {
                     let newItem = document.createElement("li");
                     newItem.textContent = document.getElementById('text1').value;
