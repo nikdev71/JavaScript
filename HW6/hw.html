@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            width: 400px;
+            border: 1px solid black;
+            border-radius: 26px;
+            margin: 2%;
+            padding: 1%;
+            display: flex;
+            flex-wrap: wrap;
+            font-family: sans-serif;
+            
+        }
+        form h4{
+            width: 50%;
+            margin: 0 35%;
+            margin-bottom: 1%;
+        }
+        #left{
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        #left label{
+            margin-top: 4.5%;
+            margin-right: 3%;
+        }
+        #right{
+            width: 50%;
+        }
+        #right input{
+            margin-top: 3%;
+            display: flex;
+            flex-direction: column;
+
+        }
+        .row {
+            display: flex;
+        }
+        table{
+            width: 200px;
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid grey;
+            padding: 8px;
+            text-align: left;
+        }
+        #test{
+            margin-top: 5%;
+            font-family: sans-serif;
+        }
+        #test input[type="radio"]{
+            margin: 0.5% 0;
+            display: none;
+        }
+        #nextQuest{
+            display: none;
+        }
+        #time{
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    </form>
+    
+    <form action="">
+        <h4>Регистрация</h4>
+        <div id="left">
+            <label for="" >Логин</label>
+            <label for="" >Пароль</label>
+            <label for="" >Подтверждение</label>
+            <label for="" >Полное имя</label>
+            <label for="">Пол</label>
+            <label for="" style="margin-top: 10%;">Специализация</label>
+            <label for="" style="margin-top: 28%;">Должность</label>
+        </div>
+        <div id="right">
+            <input type="text" id="login">
+            <input type="text" id="pass1">
+            <input type="text" id="pass2">
+            <input type="text" id="fullname" >
+            <div class="row">
+                <input type="radio" value="Мужчина"  name="state" id="rad1" >
+                <label for="" style="margin-top: 2%;">M</label>
+            </div>
+            <div class="row">
+                <input type="radio" value="Женщина"  name="state" id="rad2" >
+                <label for=""style="margin-top: 2%;">Ж</label>
+            </div>
+            <div class="row">
+                <input type="checkbox" value="Дизайн"  name="ch" id="ch1" >
+                <label for=""style="margin-top: 2%;">Дизайн</label>
+            </div>
+            <div class="row">
+                <input type="checkbox" value="Программирование"  name="ch" id="ch2" >
+                <label for=""style="margin-top: 2%;">Программирование</label>
+            </div>
+            <div class="row">
+                <input type="checkbox" value="Администрирование" name="ch" id="ch3" >
+                <label for=""style="margin-top: 2%;">Администрирование</label>
+            </div>
+            <select style="margin-top: 2%;">
+                <option >Директор</option>
+                <option >Заместитель директора</option>
+                <option >Руководитель отдела</option>
+                <option >Начальник отдела</option>
+                <option >Программист</option>
+                <option >Дизайнер</option>
+                <option >Консультант</option>
+                <option >Служащий</option>
+            </select>
+        </div>
+        <hr style="width: 100%;">
+        <div style="display: flex; justify-content: center; width: 100%;">
+            <input type="submit" id="sub" style="margin-right: 10%;" value="Регистрация">
+            <input type="reset"  value="Сброс">
+        </div>
+    </form>
+    <table id="result">
+    </table>
+
+    <diV id="test">
+        <h2>Тест по javascript</h2>
+        <input type="button" value="начать" id="startTest"><br>
+        <label for="" value="Question" id="question"></label><br>
+        <div style="display: flex;"><input type="radio" name="answer"><label for="" style="margin: 0.3% 0 0 0.5%"></label></div>
+        <div style="display: flex;"><input type="radio" name="answer"><label for="" style="margin: 0.3% 0 0 0.5%"></label></div>
+        <div style="display: flex;"><input type="radio" name="answer"><label for="" style="margin: 0.3% 0 0 0.5%"></label></div>
+        <div style="display: flex;"><input type="radio" name="answer"><label for="" style="margin: 0.3% 0 0 0.5%"></label></div>
+        <label id="time" style="display: none; margin-bottom: 1%;"></label>
+        <div style="display: flex;"><input type="button" value="Принять" id="nextQuest">
+    </div>
+    <script>
+        let isEmpty = false
+        let sub = document.getElementById("sub");
+        sub.addEventListener("click", (event)=>{
+            let inputs = document.querySelectorAll('input[type="text"]');
+            for (const key in inputs) {
+                if(inputs[key].value ==="")
+                {
+                    isEmpty = true
+                }
+            }
+            if(!rad1.checked && !rad2.checked)
+            {
+                isEmpty = true
+
+            }
+            if(!ch1.checked && !ch2.checked && !ch3.checked)
+            {
+                isEmpty = true
+            }
+            if(pass1.value.length <3 || pass1.value.length >10)
+            {
+                alert("Пороль должен быть от 3 до 10 символов")
+                return;
+            }
+            if(pass1.value !== pass2.value)
+            {
+                alert("Пароли не совпадают")
+                return;
+            }
+            if(isEmpty)
+            {
+                alert("Заполните форму")
+                return;
+            }
+
+            event.preventDefault();
+            let login = document.getElementById('login').value
+            let fullname = document.getElementById('fullname').value
+            let state = document.querySelector('input[name="state"]:checked').value
+            let specialization = document.querySelectorAll('input[name="ch"]:checked');
+            let specializationValues = [];
+                specialization.forEach(spec => {
+                    specializationValues.push(spec.value);
+                });
+            let job = document.querySelector('select').value
+
+
+            let col1 = ["Логин","Полное имя ","Пол","Специализация","Должность"]
+            let col2 = [login,fullname,state,specializationValues.join(', '),job]
+            let ind1 = 0;
+            let ind2 = 0;
+            let table = document.getElementById('result')
+            table.innerHTML = "";
+            for(let i = 0; i < 5; i++)
+            {
+                let tr = document.createElement("tr");
+                for (let index = 0; index < 2; index++) {
+                    let td = document.createElement("td");
+                    if(index === 0)
+                    {td.textContent = col1[ind1]
+                    ind1++;}
+                    else{
+                        td.textContent = col2[ind2]
+                        ind2++;
+                    }
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr)
+            }
+
+        })
+    </script>
+    <script>
+        var questions = [
+    {
+        question: "Какое ключевое слово используется для объявления переменных в JavaScript?",
+        options: ["var", "let", "const", "allOfTheAbove"],
+        correctAnswer: "YWxsT2ZUaGVBYm92ZQ==" 
+
+    },
+    {
+        question: "Какой метод используется для добавления нового элемента в конец массива?",
+        options: [".push()", ".pop()", ".join()", ".slice()"],
+        correctAnswer: "LnB1c2goKQ=="
+    },
+    {
+        question: "Какой символ используется для однострочного комментария в JavaScript?",
+        options: ["//", "/*", "<!--", "*/"],
+        correctAnswer: "Ly8="
+    },
+    {
+        question: "Какой метод используется для удаления элемента с определенным индексом из массива?",
+        options: [".splice()", ".slice()", ".filter()", ".indexOf()"],
+        correctAnswer: "LnNwbGljZSgp"
+    },
+    {
+        question: "Какая функция используется для преобразования строки в число?",
+        options: ["parseInt()", "parseFloat()", "Number()", "allOfTheAbove"],
+        correctAnswer: "YWxsT2ZUaGVBYm92ZQ=="
+    },
+    {
+        question: "Какой оператор используется для сравнения значений и их типов?",
+        options: ["==", "===", "!=", "!=="],
+        correctAnswer: "PT09"
+    },
+    {
+        question: "Какой цикл используется для выполнения кода определенное количество раз?",
+        options: ["for", "while", "do...while", "forEach"],
+        correctAnswer: "Zm9y"
+    },
+    {
+        question: "Какой метод используется для разделения строки на подстроки?",
+        options: [".split()", ".slice()", ".substring()", ".substr()"],
+        correctAnswer: "LnNwbGl0KCk="
+    },
+    {
+        question: "Какое событие возникает, когда пользователь кликает на элементе?",
+        options: ["mouseover", "click", "keydown", "scroll"],
+        correctAnswer: "Y2xpY2s="
+    },
+    {
+        question: "Какой оператор используется для объединения двух или более строк?",
+        options: ["+", "-", "*", "/"],
+        correctAnswer: "Kw=="
+    },
+    {
+        question: "Какой метод используется для преобразования элементов массива в строку?",
+        options: [".join()", ".toString()", ".concat()", ".slice()"],
+        correctAnswer: "LmpvaW4oKQ=="
+    },
+    {
+        question: "Какой метод используется для определения длины массива?",
+        options: [".length()", ".size()", ".count()", ".len()"],
+        correctAnswer: "Lmxlbmd0aCgp"
+    }
+];
+        var name1 =null;
+        startTest.addEventListener("click", (e)=>
+        {
+            name1 = prompt("Введите имя")
+
+
+            e.target.style.display = 'none'
+            nextQuest.style.display = 'block'
+
+            question.style.display = 'block';
+            let inputs = document.querySelectorAll('#test input[type="radio"]');
+
+            let numberOfQuestion = 0;
+            let personCorrectAnswers = 0;
+ 
+            question.textContent = numberOfQuestion+1+" "+ questions[numberOfQuestion].question;
+
+            for (let i=0; i<4;i++) {
+                inputs[i].style.display = 'block'
+                inputs[i].value = questions[numberOfQuestion].options[i]; 
+                inputs[i].nextSibling.textContent = questions[numberOfQuestion].options[i];
+            }
+
+            
+
+            let sec = 29;
+            let intervalId;
+
+            clearInterval(intervalId)
+            startTimer();
+
+            function startTimer() {
+                intervalId = setInterval(TimeAnswer, 1000);
+                time.style.display = 'block';
+                time.textContent = "0:" + 30;
+            }
+
+            function TimeAnswer() {
+                time.textContent = "0:" + sec;
+                sec--;
+                if (sec < 0) {
+                    clearInterval(intervalId);
+                    NextQuestion();
+                }
+            }
+            
+            function NextQuestion(){
+                let encode;
+                for (let i=0; i<4;i++){
+                    if(inputs[i].checked) 
+                    {
+                        encode = btoa(inputs[i].value)
+                        if(encode === questions[numberOfQuestion].correctAnswer)
+                        {
+                            personCorrectAnswers++;
+                        }
+                    }
+                }
+                numberOfQuestion++;
+                {
+                    if(numberOfQuestion === questions.length)
+                    {
+                        alert(name1+", Вы сдали тест на " +personCorrectAnswers + " балов")
+                        e.target.style.display = 'block'
+                        nextQuest.style.display = 'none'
+
+                        question.style.display = 'none';
+                        for (let i=0; i<4;i++) {
+                        inputs[i].style.display = 'none';
+                        inputs[i].nextSibling.textContent = "";
+                        }
+                        clearInterval(intervalId);
+                        time.style.display = 'none';
+                        return;
+                    }
+                    question.textContent = numberOfQuestion+1+" "+questions[numberOfQuestion].question;
+
+                    for (let i=0; i<4;i++) {
+                        inputs[i].style.display = 'block'
+                        inputs[i].value = questions[numberOfQuestion].options[i]; 
+                        inputs[i].nextSibling.textContent = questions[numberOfQuestion].options[i];
+                    }
+                }
+                clearInterval(intervalId);
+                sec = 29;
+                startTimer();
+            }
+
+            nextQuest.addEventListener("click", ()=>
+            {
+                NextQuestion();
+            });
+            
+        })
+        
+        
+    </script>
+</body>
+</html>
