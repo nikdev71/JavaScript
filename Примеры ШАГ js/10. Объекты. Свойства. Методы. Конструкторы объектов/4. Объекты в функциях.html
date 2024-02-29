@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Объекты в функциях</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+        function createClub(name, city, year, propName, propCity, propYear) {
+            return {
+                [name]: propName,
+                [city]: propCity,
+                [year]: propYear,
+                displayInfo() {
+                    document.write(`<br>${name}: ${propName}<br>${city}: ${propCity}<br>${year}: ${propYear}`);
+                }
+            };
+        };
+
+        let club = createClub("Club Name", "City", "Founding year",  "Динамо", "Киев", 1927);
+        club.displayInfo();
+
+        club = createClub("Название клуба", "Город", "Год основания", "Черноморец", "Одесса", 1936);
+        club.displayInfo();
+
+    </script>
+</body>
+
+</html>

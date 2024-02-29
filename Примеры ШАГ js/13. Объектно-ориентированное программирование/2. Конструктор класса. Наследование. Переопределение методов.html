@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+        class Person {
+            constructor(name, surname, age) {
+                this._name = name;
+                this._surname = surname;
+                this._age = age;
+            }
+            setName(name) {
+                if (!name) {
+                    throw new Error("Значение name не определено!");
+                }
+                this._name = name;
+            }
+            getName() {
+                return this._name;
+            }
+            setSurname(surname) {
+                if (!surname) {
+                    throw new Error("Значение surname не определено!");
+                }
+                this._surname = surname;
+            }
+            getSurname() {
+                return this._surname;
+            }
+            setAge(age) {
+                if (!age || age <= 0) {
+                    throw new Error("Значение age должно быть положительным!");
+                }
+                this._age = age;
+            }
+            getAge() {
+                return this._age;
+            }
+
+            print() {
+                document.write("Имя: " + this._name + "<br />");
+                document.write("Фамилия: " + this._surname + "<br />");
+                document.write("Возраст: " + this._age + "<br />");
+            }
+        }
+
+        class Student extends Person {
+            constructor(name, surname, age, rating) {
+                super(name, surname, age);
+                this._rating = rating;
+            }
+            setRating(rating) {
+                if (!rating || rating <= 0 || rating > 12) {
+                    throw new Error("Значение rating должно быть в диапазоне от 1 до 12!");
+                }
+                this._rating = rating;
+            }
+            getRating() {
+                return this._rating;
+            }
+            print() {
+                super.print();
+                document.write("Рейтинг: " + this._rating + "<br />");
+            }
+        }
+
+        let person = new Person("Иван", "Иваненко", 25);
+        person.print();
+        person.setName("Петр");
+        person.setSurname("Петренко");
+        person.setAge(30);
+        person.print();
+        let copy = person; // копируются ссылки
+        copy.print();
+        person.setName("Алексей");
+        person.setSurname("Алексеев");
+        person.setAge(22);
+        copy.print();
+
+        let student = new Student("Сергей", "Сергеев", 27, 10.5);
+        student.print();
+        student.setName("Олег");
+        student.setSurname("Кузнецов");
+        student.setAge(30);
+        student.setRating(12);
+        student.print();
+    </script>
+</body>
+</html>

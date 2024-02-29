@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function HtmlElement(tagname, selfclosing)
+        {
+            this.tagname = tagname;
+            this.isClosing = selfclosing;
+            this.textInner = '';
+            this.arrAttr = [];
+            this.arrStyles = [];
+            this.innerTags=[];
+            this.setAttr = function(attr, value){
+                this.arrAttr.push({ attrribute: attr, value : value})
+            }
+            this.setStyle = function(property, value){
+                this.arrStyles.push({ property: property, value : value})
+            }
+            this.addTagStart = function(node){
+                this.innerTags.push(node)
+            }
+            this.addTagEnd = function(node){
+                this.innerTags.unshift(node)
+            }
+            this.getHtml = function (){
+                let html = '<'+this.tagname;
+
+                this.arrAttr.forEach(element => {
+                    html += ` ${element.attrribute}="${element.value}"`;
+                });
+
+                if(this.arrStyles.length > 0){
+                    html+=' style="';
+                    this.arrStyles.forEach(element => {
+                        html += `${element.property}:${element.value};` ;
+                    });
+                    html+='"';
+                }
+                if(this.isClosing){
+                    html+='/>';
+                }
+                else{
+                    html+= '>'
+                    html+=this.textInner;
+                    this.innerTags.forEach(elem=>{
+                        html+=elem.getHtml();
+                    });
+                    html+=`</${this.tagname}>`
+                }
+                return html;
+            }
+        }
+    </script>
+    <script>
+        let div = new HtmlElement("div",false);
+        div.setAttr("id", "wrapper");
+        div.setStyle("display","flex");
+
+        let div2 = new HtmlElement("div",false);
+        div2.setStyle("width","300px");
+        div2.setStyle("margin","10px");
+
+        let h3= new HtmlElement("h3",false);
+        h3.textInner ="What is Lorem Ipsum?";
+        let img = new HtmlElement("img",false)
+        img.setAttr("src","lipsum.jpg");
+        img.setAttr("alt","Lorem Ipsum");
+        img.setStyle("width", "100%");
+        let p = new HtmlElement("p", false);
+        p.setStyle("text-align","justify");
+        p.textInner = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae ratione consectetur voluptatum doloribus voluptate obcaecati voluptatem fugit, consequuntur voluptatibus atque repudiandae magnam maiores voluptas nam cumque tempora quam similique harum!";
+        
+        let a = new HtmlElement("a",false);
+        a.setAttr("href","https://www.lipsum.com/");
+        a.setAttr("target","_blank")
+        a.textInner = "More..."
+        
+        p.addTagEnd(a);
+        div2.addTagStart(h3);
+        div2.addTagEnd(img);
+        div2.addTagEnd(p)
+
+        div.addTagStart(div2)
+        div.addTagStart(div2)
+        let html = div.getHtml();
+        document.write(html)
+    </script>
+</body>
+</html>

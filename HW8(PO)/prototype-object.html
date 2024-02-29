@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: sans-serif;
+
+        }
+        textarea,input,p,button{
+            font-size: 16px;
+            display: block;
+            margin: 10px 0;
+        }
+        button{
+            padding: 0.5em 1em;
+            background:none;
+            border: 1px solid black;
+            border-radius: 26px;
+        }
+        button:hover{
+            transition: 0.3s;
+            background-color: lightgrey;
+        }
+    </style>
+</head>
+<body>
+    <p>Введите цвет "название"</p>
+    <input type="text" id="inpcolor">
+    <textarea id="textarea" style="margin-top: 20px;">
+
+    </textarea>
+    <button id="inkquan">Print Ink Quantity</button>
+    <button id="printtext">Print Text</button>
+    <button id="refmark">Refuel Mark</button>
+    <p id="paragraph">sdsdsd</p>
+    <script>
+        function Marker(color,inkQuantity = 100){
+            this._color  = color;
+            this._inkQuantity = inkQuantity ;
+
+            this.setColor = function(color){
+                this._color = color
+            }
+
+            this.getInkQunatity= () =>{
+                this._color = inpcolor.value;
+                paragraph.style.color = this._color;
+                paragraph.innerText= "Ink Quantity: "+ this._inkQuantity;
+            }
+            this.printText= ()=>
+            {
+                this._color = inpcolor.value;
+                paragraph.style.color = this._color;
+                let text = textarea.value;
+                let nonSpaceChars = text.replace(/\s/g, "").length; 
+                let inkNeed = nonSpaceChars * 0.5;
+                if(this._inkQuantity < inkNeed)
+                {
+                    paragraph.innerText = text;
+
+                }
+                else{
+                    this._inkQuantity -= inkNeed;
+                    paragraph.innerText = text;
+                }
+            }
+
+        }
+        function RefuelMarker(color, inkQuantity){
+            Marker.call(this, color, inkQuantity);
+
+            this.refuelInk = ()=>{
+                this._inkQuantity = 100;
+            }
+        }
+
+        let marker = new RefuelMarker("black",100);
+        inkquan.addEventListener("click", marker.getInkQunatity)
+        printtext.addEventListener("click", marker.printText);
+        refmark.addEventListener("click",marker.refuelInk)
+    </script>
+</body>
+</html>

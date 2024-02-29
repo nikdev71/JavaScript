@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Конструктор</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+        function WidthRect() {
+            return this.right - this.left;
+        }
+        function HeightRect() {
+            return this.bottom - this.top;
+        }
+
+        function Rectangle(l, t, r, b) {
+            this.left = l;
+            this.top = t;
+            this.right = r;
+            this.bottom = b;
+            this.Width = WidthRect;
+            this.Height = HeightRect;
+            return this;
+        }
+        let leftX = parseInt(prompt("Введите координату X левого верхнего угла: ", ""));
+        let topY = parseInt(prompt("Введите координату Y левого верхнего угла: ", ""));
+        let rightX = parseInt(prompt("Введите координату X правого нижнего угла: ", ""));
+        let bottomY = parseInt(prompt("Введите координату Y правого нижнего угла: ", ""));
+        let r = new Rectangle(leftX, topY, rightX, bottomY);
+        alert(r instanceof Rectangle); 
+        alert("Ширина прямоугольника: " + r.Width());
+        alert("Высота прямоугольника: " + r.Height());
+        let rect = {
+            left: leftX,
+            top: topY,
+            right: rightX,
+            bottom: bottomY,
+            Width() {
+                return this.right - this.left;
+            },
+            Height() {
+                return this.bottom - this.top;
+            }
+        }
+        alert(rect instanceof Rectangle); 
+        alert("Ширина прямоугольника: " + rect.Width());
+        alert("Высота прямоугольника: " + rect.Height());
+    </script>
+</body>
+
+</html>

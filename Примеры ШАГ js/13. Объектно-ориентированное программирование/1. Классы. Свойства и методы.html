@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+
+<body>
+    <script>
+        class Person {
+            _name;
+            _surname;
+            _age;
+            setName(name) {
+                if (!name) {
+                    throw new Error("Значение name не определено!");
+                }
+                this._name = name;
+            }
+            getName() {
+                return this._name;
+            }
+            setSurname(surname) {
+                if (!surname) {
+                    throw new Error("Значение surname не определено!");
+                }
+                this._surname = surname;
+            }
+            getSurname() {
+                return this._surname;
+            }
+            setAge(age) {
+                if (!age || age <= 0) {
+                    throw new Error("Значение age должно быть положительным!");
+                }
+                this._age = age;
+            }
+            getAge() {
+                return this._age;
+            }
+
+            print() {
+                document.write("Имя: " + this._name + "<br />");
+                document.write("Фамилия: " + this._surname + "<br />");
+                document.write("Возраст: " + this._age + "<br />");
+            }
+        }
+
+        let person = new Person();
+        person._name = "Иван";
+        person._surname = "Иваненко";
+        person._age = 29;
+        person.print();
+        person.setName("Петр");
+        person.setSurname("Петренко");
+        person.setAge(30);
+        person.print();
+        let copy = person; // копируются ссылки
+        copy.print();
+        person.setName("Алексей");
+        person.setSurname("Алексеев");
+        person.setAge(22);
+        copy.print();
+    </script>
+</body>
+
+</html>
