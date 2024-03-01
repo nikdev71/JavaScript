@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #000000;
+        }
+        input{
+            width: 30px;
+            margin: 0 3px;
+            color: whitesmoke;
+            border-radius: 26px;
+            border: 1px solid #330066;
+            padding: 0.5em 1em;
+            outline: none;
+            background: transparent;
+        }
+        button{
+            display: block;
+            margin: 10px 0;
+            color: whitesmoke;
+            border-radius: 26px;
+            background: none;
+            border: 1px solid #330066;
+            width: 230px;
+            height: 40px;
+            font-size: 13px;
+        }
+        button:hover{
+            cursor: pointer;
+            transition: 0.5s;
+            color: black;
+            background-color: whitesmoke;
+        }
+        div{
+            font-family: sans-serif;
+            color: whitesmoke;
+            border: 1px solid #330066;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+            border-radius: 26px;
+            margin: 5%  auto;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>Введите дату(день,месяц,год)</p>
+        <div style="border: none; flex-direction: row; width: auto;">
+        <input type="text" id="dayinp">
+        <input type="text" id="monthinp">
+        <input type="text" id="yearinp">
+        </div>
+        <button id="btndmstr">Число и месяц текстом</button>
+        <button id="isFuture">Является ли дата будущим</button>
+        <button id="isLeapYear">Является ли год высокосным</button>
+        <button id="nextDate">Следуйщая дата</button>
+        <p id="text"></p>
+    </div>
+    <script>
+        let months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+
+        class ExtendedDate extends Date{
+            #day;
+            #month;
+            #year;
+            constructor(day,month,year){
+                super(day,month,year);
+                this.#day = day;
+                this.#month = month;
+                this.#year = year;
+            }
+            setDay(day){
+                this.#day = day;
+            }
+            setMonth(month){
+                this.#month = month;
+            }
+            setYear(year){
+                this.#year = year;
+            }
+            getMonth(){
+                return this.#month;
+            }
+            allSet(){
+                this.setDay(dayinp.value)
+                this.setMonth(monthinp.value)
+                this.setYear(yearinp.value)
+                if(isNaN(parseInt((this.#day))) || isNaN(parseInt((this.#month))) || isNaN(parseInt((this.#year)))
+                || parseInt((this.#day))<1 ||parseInt((this.#day))>31 || parseInt((this.#month))<1 || parseInt((this.#month))>12 ||parseInt((this.#year))<0) 
+                {throw new TypeError("Value is incorrect")}
+            }
+            stringDayMonth(){
+                try{
+                    this.allSet();
+                    let month = months[this.getMonth()-1]
+                    text.innerText = this.#day+" "+ month;
+                }
+                catch(e){
+                    text.innerText = e.message;
+                }
+            }
+            futureOrOld(){
+                try{
+                    let now = new Date();
+                    this.allSet();
+                    let currentTime = new Date(this.#year,this.#month-1,this.#day)
+                    text.innerText = currentTime.getTime() >= now.getTime() ? "Прошлое" : "Будущее";
+                }
+                catch(e){
+                    text.innerText = e.message;
+                }
+            }
+            isLeapYear(){
+                try{
+                    this.allSet();
+                    text.innerText = this.#year%4==0 ? "Год - высокосный" : "Год - невысокосный";
+                }
+                catch(e){
+                    text.innerText = e.message;
+                }
+            }
+            NextDate(){
+                try{
+                    this.allSet();
+                    let month = months[this.getMonth()-1]
+                    text.innerText = parseInt(this.#day)+1+" "+ month +" "+ this.#year;
+                }
+                catch(e){
+                    text.innerText = e.message;
+                }
+            }
+        }
+        let date = new ExtendedDate(2003,11,19)
+        btndmstr.addEventListener("click", ()=>{
+            date.stringDayMonth();
+        });
+        isFuture.addEventListener("click", ()=>{
+            date.futureOrOld();
+        });
+        isLeapYear.addEventListener("click",()=>{
+            date.isLeapYear();
+        });
+        nextDate.addEventListener("click",()=>{
+            date.NextDate();
+        })
+    </script>
+</body>
+</html>
