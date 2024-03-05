@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Масштабирование</title>
+</head>
+
+<body>
+  <canvas id="myCanvas">Обновите браузер</canvas>
+  <script>
+    let canvas = document.getElementById("myCanvas");
+    let context = canvas.getContext("2d");
+    canvas.height = 800;
+    canvas.width = 800;
+    context.fillStyle = "blue";
+    context.fillRect(30, 30, 100, 100);
+    context.scale(2, 1.5); // растяжение по ширине в 2 раза и по высоте в 1.5 раза
+    context.globalAlpha = 0.5;
+    context.fillStyle = "red";
+    context.fillRect(30, 30, 100, 100);
+  </script>
+</body>
+
+</html>

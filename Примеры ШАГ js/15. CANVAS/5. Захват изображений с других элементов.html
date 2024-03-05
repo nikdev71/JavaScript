@@ -1,0 +1,30 @@
+﻿<!doctype html>
+<html>
+
+<head>
+	<title>Захват изображений с других элементов</title>
+	<meta charset='utf-8' />
+</head>
+
+<body>
+	<video id="myVideo" controls loop width="300" height="200">
+		<source src="01_blur.mp4" type="video/mp4">
+	</video>
+
+	<canvas id="myCanvas" width="300" height="200" style="background-color:#eee; border:1px solid #ccc;">
+		Ваш браузер не поддерживает Canvas
+	</canvas>
+	<div>
+		<button id="snap">Сделать снимок</button>
+	</div>
+	<script>
+		let canvas = document.getElementById("myCanvas");
+		let context = canvas.getContext("2d");
+		let video = document.getElementById("myVideo");
+		document.getElementById("snap").onclick = function (e) {
+			context.drawImage(video, 0, 0, 300, 200);
+		}
+	</script>
+</body>
+
+</html>

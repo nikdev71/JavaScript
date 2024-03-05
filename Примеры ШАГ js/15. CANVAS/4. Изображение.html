@@ -1,0 +1,27 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>imgExample</title>
+</head>
+
+<body>
+    <canvas id='example'>Обновите браузер</canvas>
+    <script>
+        let canvas = document.getElementById("example");
+        let ctx = canvas.getContext('2d');
+        let pic = new Image();
+        canvas.width = 300;
+        canvas.height = 450;
+        pic.src = 'http://habrahabr.ru/i/nocopypast.png';
+        pic.onload = function () {    // Событие onLoad, ждём момента пока загрузится изображение
+            ctx.drawImage(pic, 0, 0, 135, 136);
+            ctx.drawImage(pic, 0, 130, 300, 150);
+            ctx.drawImage(pic, 25, 42, 85, 55, 0, 300, 170, 110);
+            // https://developer.mozilla.org/ru/docs/Web/API/CanvasRenderingContext2D/drawImage
+        }
+    </script>
+</body>
+
+</html>

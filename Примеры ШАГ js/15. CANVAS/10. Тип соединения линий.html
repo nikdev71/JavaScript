@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Тип соединения линий</title>
+</head>
+
+<body>
+  <canvas id="myCanvas">Обновите браузер</canvas>
+  <script>
+    let canvas = document.getElementById("myCanvas");
+    let context = canvas.getContext("2d");
+    canvas.height = 800;
+    canvas.width = 800;
+    context.strokeStyle = "blue";
+    context.lineWidth = 15;
+    context.lineJoin = "miter";
+    context.strokeRect(40, 40, 100, 100);
+    context.lineJoin = "bevel";
+    context.strokeRect(180, 40, 100, 100);
+    context.lineJoin = "round";
+    context.strokeRect(310, 40, 100, 100);
+  </script>
+</body>
+
+</html>
