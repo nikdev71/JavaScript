@@ -4,8 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            background-image: url('Галерея/IMG/BG1.JPG');
+            font-family: sans-serif;
+            color: white;
+            text-align: center;
+        }
+        #img-container{
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin: auto;
+            width: 60%;
+        }
+        #img-container img {
+            width: 20%; 
+            height: auto;
+            margin: 5px;
+            border: 4px solid darkblue;
+        }   
+        #img-container img:hover{
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    
+    <img src="Галерея/IMG/TITLE.JPG" alt="" style="width: 75%; margin: 50px 0">
+    <h1>Компьютерная графика и дизайн</h1>
+    <div id="img-container">
+        <img src="Галерея/DESIGN/SMALL/P0.JPG" onclick="openwindow('Галерея/DESIGN/P0.JPG')">
+        <img src="Галерея/DESIGN/SMALL/P1.JPG" onclick="openwindow('Галерея/DESIGN/P1.JPG')">
+        <img src="Галерея/DESIGN/SMALL/P2.JPG" onclick="openwindow('Галерея/DESIGN/P2.JPG')">
+        <img src="Галерея/DESIGN/SMALL/P3.JPG" onclick="openwindow('Галерея/DESIGN/P3.JPG')">
+        <img src="Галерея/DESIGN/SMALL/P4.JPG" onclick="openwindow('Галерея/DESIGN/P4.JPG')">
+        <img src="Галерея/DESIGN/SMALL/P5.JPG" onclick="openwindow('Галерея/DESIGN/P5.JPG')">
+        <img src="Галерея/DESIGN/SMALL/P6.JPG" onclick="openwindow('Галерея/DESIGN/P6.JPG')">
+    </div>
+    <script>
+        function openwindow(url){
+            var img = new Image();
+            img.src = url;
+            img.onload = function() {
+                var width = this.width;
+                var height = this.height;
+                let newWin = window.open(
+                    url,
+                    "doc",
+                    "width=" + width + ", height=" + height + ", resizable=yes"
+                );
+            };
+        }
+    </script>
 </body>
 </html>
