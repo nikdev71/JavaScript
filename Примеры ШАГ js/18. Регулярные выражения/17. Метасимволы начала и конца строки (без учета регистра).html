@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Регулярные выражения</title>
+</head>
+
+<body>
+    <script>
+        let i;
+        let s = prompt("Что мы изучаем?");
+        if ((i = s.search(/^JavaScript$/i)) == -1) {
+            alert("Забыли, да?");
+        }
+        else {
+            alert("Правильно!");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Регистрационная форма</title>
+    <style>
+        body {
+            font: 10pt Tahoma;
+        }
+
+        table.form_holder1 {
+            font: 10pt Tahoma;
+            background-color: #ddeeff;
+        }
+
+            table.form_holder1 thead {
+                background-color: #334466;
+                color: white;
+                font-weight: bold;
+            }
+    </style>
+</head>
+<body onload="docLoad()">
+    <form name="frm1">
+        <table class="form_holder1" cellspacing="1">
+            <thead>
+                <tr>
+                    <td colspan="2" align="center">Регистрация на сервере:</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Логин:</td>
+                    <td><input size="26" type="text" name="login" /></td>
+                </tr>
+                <tr>
+                    <td>Пароль:</td>
+                    <td><input size="26" type="password" name="text_password1" /></td>
+                </tr>
+                <tr>
+                    <td>Подтверждение:</td>
+                    <td><input size="26" type="password" name="text_password2" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <hr />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Полное имя (ФИО):</td>
+                    <td><input size="26" type="text" name="fullname" /></td>
+                </tr>
+                <tr valign="top">
+                    <td>Пол:</td>
+                    <td>
+                        <input type="radio" name="radio_gender" value="male" />мужской<br />
+                        <input type="radio" name="radio_gender" value="female" />женский
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        Иностранные<br />
+                        языки:
+                    </td>
+                    <td>
+                        <input type="checkbox" name="check_languages_1" />Английский<br />
+                        <input type="checkbox" name="check_languages_2" />Немецкий<br />
+                        <input type="checkbox" name="check_languages_3" />Французский<br />
+                        <input type="checkbox" name="check_languages_4" />Испанский<br />
+                        <input type="checkbox" name="check_languages_5" />Итальянский<br />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Сфера деятельности:</td>
+                    <td>
+                        <select name="list_work">
+                            <option value="0">обслуживание</option>
+                            <option value="1" selected>образование</option>
+                            <option value="2">медицина</option>
+                            <option value="3">наука</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>e-mail:</td>
+                    <td><input size="26" type="text" name="e_mail" /></td>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        Дополнительная<br />
+                        информация:
+                    </td>
+                    <td>
+                        <textarea name="text_info" cols="20" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="button" value="Готово" onclick="validateForm()" /> <input type="reset" value="Сброс" onclick="clearCookie()"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <script>
+        function validateForm() {
+        var login = document.forms["frm1"]["login"].value;
+        var password1 = document.forms["frm1"]["text_password1"].value;
+        var password2 = document.forms["frm1"]["text_password2"].value;
+        var fullname = document.forms["frm1"]["fullname"].value;
+        var email = document.forms["frm1"]["e_mail"].value;
+
+        var loginRegex = /^[a-zA-Z0-9_-]{4,20}$/;
+        var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        var fullnameRegex = /^[a-zA-Zа-яА-ЯЁё\s-]+$/;
+        var emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
+        if (!loginRegex.test(login)) {
+            alert("Неправильный формат логина!");
+            return false;
+        }
+        if (!passwordRegex.test(password1)) {
+            alert("Неправильный формат пароля!");
+            return false;
+        }
+        if (password1 != password2) {
+            alert("Пароли не совпадают!");
+            return false;
+        }
+        if (!fullnameRegex.test(fullname)) {
+            alert("Неправильный формат ФИО!");
+            return false;
+        }
+        if (!emailRegex.test(email)) {
+            alert("Неправильный формат email!");
+            return false;
+        }
+        saveCookie();
+        return true;
+        }
+
+        function saveCookie(){
+            let d = new Date();
+            d.setMonth(d.getMonth() + 6);
+            document.cookie = "login=" + encodeURIComponent(frm1.login.value) + ";path=/;expires=" + d.toUTCString() + ";";
+            document.cookie = "password=" + encodeURIComponent(frm1.text_password1.value) + ";path=/;expires=" + d.toUTCString() + ";";
+            document.cookie = "fullname=" + encodeURIComponent(frm1.fullname.value) + ";path=/;expires=" + d.toUTCString() + ";";
+            document.cookie = "email=" + encodeURIComponent(frm1.e_mail.value) + ";path=/;expires=" + d.toUTCString() + ";";
+            document.cookie = "textinfo=" + encodeURIComponent(frm1.text_info.value) + ";path=/;expires=" + d.toUTCString() + ";";
+            
+            let gender = document.querySelector('input[name="radio_gender"]:checked');
+            if(gender){
+                document.cookie = "gender="+ encodeURIComponent(gender.value)+ ";path=/;expires=" + d.toUTCString() + ";";
+            }
+
+            let languages = document.querySelectorAll('input[name^="check_languages"]');
+            languages.forEach(function(lang) {
+                if(lang.checked)
+                document.cookie = lang.name + "=" + encodeURIComponent(lang.value) + ";path=/;expires=" + d.toUTCString() + ";";
+                else{
+                document.cookie = lang.name + "="+";path=/;expires=" + d.toUTCString() + ";";
+                }
+            });
+
+            let work = frm1.list_work.value;
+            if(work){
+                document.cookie = "work="+ encodeURIComponent(work)+ ";path=/;expires=" + d.toUTCString() + ";";
+            }
+            alert("Данные сохранены!");
+        }
+        function docLoad() {
+            let str = document.cookie;
+            if (str.length === 0) return;
+
+            let arr = str.split(';');
+            
+            let login, password, fullname, gender, langsName=[],langsState=[], work,email,textinfo;
+
+            arr.forEach(function(item) {
+                let pair = item.trim().split('=');
+                let key = pair[0].trim();
+                let value = pair[1].trim();
+
+                value = decodeURIComponent(value);
+
+                switch (key) {
+                    case "login":
+                        login = value;
+                        break;
+                    case "password":
+                        password = value;
+                        break;
+                    case "fullname":
+                        fullname = value;
+                        break;
+                    case "gender":
+                        gender = value;
+                        break;
+                    case "work":
+                        work = value;
+                        break;
+                    case "email":
+                        email = value;
+                        break;
+                    case "textinfo":
+                        textinfo = value;
+                        break;
+                    default:
+                    if (key.startsWith("check_languages")) {
+                    langsName.push(key);
+                    langsState.push(value);
+                    }
+                    break;
+                }
+            });
+
+            document.forms["frm1"]["login"].value = login;
+            document.forms["frm1"]["text_password1"].value = password;
+            document.forms["frm1"]["text_password2"].value = password;
+            document.forms["frm1"]["fullname"].value = fullname;
+            document.forms["frm1"]["e_mail"].value = email;
+            document.forms["frm1"]["text_info"].value = textinfo;
+
+            if (gender) {
+                document.querySelector('input[name="radio_gender"][value="' + gender + '"]').checked = true;
+            }
+
+            if (langsName) {
+                for (let index = 0; index < langsName.length; index++) {
+                    if(langsState[index] == "on"){
+                        document.querySelector('input[name="' + langsName[index] + '"]').checked = true;
+                    }
+                    else{
+                        document.querySelector('input[name="' + langsName[index] + '"]').checked = false;
+                    }
+                }
+            }
+
+            document.forms["frm1"]["list_work"].querySelector('option[value="'+work+'"]').selected = true;
+            
+        }
+        function clearCookie(){
+            document.cookie.clearCookie();
+        }
+    </script>
+</body>
+</html>

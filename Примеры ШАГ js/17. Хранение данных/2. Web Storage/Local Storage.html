@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Local storage</title>
+    <style>
+        #div1,
+        #div2 {
+            display: none;
+        }
+    </style>
+
+    <script>
+        function btnClick() {
+            if (form1.firstname.value.length == 0 || form1.lastname.value.length == 0 ||
+                form1.age.value.length == 0 || form1.country.value.length == 0) {
+                alert("Не все поля заполнены!");
+                return;
+            }
+            localStorage.setItem("firstname", form1.firstname.value);
+            localStorage.setItem("lastname", form1.lastname.value);
+            localStorage.setItem("age", form1.age.value);
+            localStorage.setItem("country", form1.country.value);
+            alert("Данные сохранены!");
+        }
+        function docLoad() {
+            let firstname = localStorage.getItem("firstname");
+            let lastname = localStorage.getItem("lastname");
+            let age = localStorage.getItem("age");
+            let country = localStorage.getItem("country");
+            if (firstname == null) {
+                document.getElementById("div1").style.display = "block";
+                document.getElementById("div2").style.display = "none";
+                return;
+            }
+            document.getElementById("div1").style.display = "none";
+            document.getElementById("div2").style.display = "block";
+            document.getElementById("info").innerHTML = "Имя: " + firstname + "<br />" +
+                "Фамилия: " + lastname + "<br />" +
+                "Возраст: " + age + "<br />" +
+                "Страна: " + country + "<br />";
+        }
+        function delData() {
+            localStorage.removeItem("firstname");
+            localStorage.removeItem("lastname");
+            localStorage.removeItem("age");
+            localStorage.removeItem("country");
+            // localStorage.clear();
+            alert("Данные успешно удалены!");
+        }
+
+    </script>
+</head>
+
+<body onload="docLoad()">
+    <div id="div1">
+        <form name="form1">
+            Имя: <input type="text" name="firstname" /><br />
+            Фамилия: <input type="text" name="lastname" /><br />
+            Возраст: <input type="text" name="age" /><br />
+            Страна: <input type="text" name="country" /><br />
+            <input type="button" value="Сохранить" onclick="btnClick()" />
+        </form>
+    </div>
+    <div style="text-align:center" id="div2">
+        <h1 id="info" style="text-align:center"></h1>
+        <input type="button" value="Удалить данные" onclick="delData()" />
+    </div>
+</body>
+
+</html>
