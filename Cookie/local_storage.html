@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #frm1{
+            display: block;
+            background-color: rgb(248, 234, 217);
+            width: 320px;
+            font-family: sans-serif;
+            padding: 1em 2em;
+        }
+        #frm1 input
+        {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+            position: relative;
+        }
+       .wrongalert{
+        color: maroon;
+        display: none;
+       }
+       .label-container{
+        display: flex;
+        justify-content: space-between;
+        width:100%;
+       }
+        
+    </style>
+</head>
+<body onload="docLoad()">
+    <form action="" id="frm1" >
+        <label style="text-align: center; display: block;margin-bottom: 10px; font-weight: 600;">Registraition</label>
+        <div class="label-container">
+            <label for="email">Email:</label>
+            <label for="email" class="wrongalert" id="wrongemail">Wrong email adress</label>
+        </div>
+        <input type="text" name="email">
+        <div class="label-container">
+            <label for="pass1">Password:</label>
+            <label for="pass1" class="wrongalert" id="wrongpass1">Wrong password</label>
+        </div>
+        <input type="password"  id="pass1">
+        <div class="label-container">
+            <label for="pass2">Repeat:</label>
+            <label for="pass2" class="wrongalert" id="wrongpass2">Password mismatch</label>
+        </div>
+        <input type="password" name="pass2">
+        <input type="button" style="font-size: 15px;" value="Sign Up" onclick="validateForm()">
+    </form>
+    <script>
+        function validateForm() {
+        let result = true;
+        var email = document.forms["frm1"]["email"].value;
+        var password1 = document.forms["frm1"]["pass1"].value;
+        var password2 = document.forms["frm1"]["pass2"].value;
+
+        var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+        var emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
+        if (!emailRegex.test(email)) {
+            wrongemail.style.display = 'block';
+            result= false;
+            } else {
+                wrongemail.style.display = 'none';
+        }
+        if (!passwordRegex.test(password1)) {
+            wrongpass1.style.display = 'block';
+            result= false;
+
+        } else {
+            wrongpass1.style.display = 'none';
+        }
+
+        if (password1 != password2) {
+            wrongpass2.style.display = 'block';
+            result= false;
+
+        } else {
+            wrongpass2.style.display = 'none';
+        }
+
+        if(result)
+        {
+            localStorage.setItem("email", frm1.email.value);
+            localStorage.setItem("password", frm1.pass1.value);
+            window.location.href = 'web_info.html';
+        }
+        
+        }
+
+        function docLoad(){
+            let email = localStorage.getItem("email");
+            let password = localStorage.getItem("password");
+            if(email != null && password != null){
+                window.location.href = 'web_info.html';
+            }
+        }
+    </script>
+</body>
+</html>

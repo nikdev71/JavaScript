@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info</title>
+    <style>
+        #frm2{
+            display: block;
+            background-color: rgb(248, 234, 217);
+            width: 450px;
+            font-family: sans-serif;
+            padding: 1em 2em;
+        }
+        #frm2 input
+        {
+            display: block;
+            margin: 5px 0 10px 0;
+            width: 100%;
+            position: relative;
+        }
+       .wrongalert{
+        color: maroon;
+        display: none;
+       }
+       .row{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+       }
+       .label-container{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width:48%;
+       }
+      
+       .user-container{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width:100%;
+       }
+    </style>
+</head>
+<body onload="frm2Load()">
+    <form action="" id="frm2">
+        <div class="user-container">
+            <p id="useremail">test@gmail.com</p>
+            <a href="local_storage.html" style="margin-left: 5px;" onclick="delData()">Exit</a>
+        </div>
+        <hr>
+        <label style="text-align: center; display: block;margin-bottom: 10px; font-weight: 600;">User Info</label>
+        <div class="row">
+            <div class="label-container">
+                <label for="">Firstname:</label>
+                <label for="" class="wrongalert" id="wrongfirstname">Wrong firstname</label>
+                <input type="text" name="firstname">
+            </div>
+            <div class="label-container">
+                <label for="">Lastname:</label>
+                <label for="" class="wrongalert" id="wronglastname">Wrong lastname</label>
+                <input type="text" name="lastname">
+            </div>
+        </div>
+        <div class="row">
+            <div class="label-container">
+                <label for="">Year of birth:</label>
+                <label for="" class="wrongalert" id="wrongdate">Wrong date</label>
+                <input type="text"  name="yearofbirth">
+            </div>
+            <div class="label-container">
+                <label for="">Gender:</label>
+                <select name="gender" id="Gender" style="width: 100%; height: 26px; margin-top: -5px;">
+                    <option value="male" selected>Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label-container">
+                <label for="">Phone number:</label>
+                <label for="" class="wrongalert" id="wrongphone">Wrong phone</label>
+                <input type="text" name="phone">
+            </div>
+            <div class="label-container">
+                <label for="">Skype:</label>
+                <label for="" class="wrongalert" id="wrongskype">Wrong Skype</label>
+                <input type="text" name="skype">
+            </div>
+        </div>
+        <input type="button" style="font-size: 15px;" value="Save" onclick="validateForm()">
+    </form>
+    <script>
+         function delData() {
+            localStorage.clear()
+            window.location.href = 'local_storage.html'
+        }
+        function frm2Load(){
+            let allnull = true;
+            let firstname = localStorage.getItem("firstname")
+            let lastname = localStorage.getItem("lastname")
+            let yearofbirth = localStorage.getItem("yearofbirth")
+            let gender = localStorage.getItem("gender")
+            let phone = localStorage.getItem("phone")
+            let skype = localStorage.getItem("skype")
+            let email = localStorage.getItem("email")
+
+            if(email !=null){
+                allnull = false;
+                useremail.innerHTML = email;
+            }
+            if(firstname !=null){
+                allnull = false;
+                frm2.firstname.value = firstname;
+            }
+            if(lastname !=null){
+                allnull = false;
+                frm2.lastname.value = lastname;
+            }
+            if(gender !=null){
+                allnull = false;
+                frm2.gender.value = gender;
+            }
+            if(yearofbirth !=null){
+                allnull = false;
+                frm2.yearofbirth.value = yearofbirth;
+            }
+            if(phone !=null){
+                allnull = false;
+                frm2.phone.value = phone;
+            }
+            if(skype !=null){
+                allnull = false;
+                frm2.skype.value = skype;
+            }
+            if(allnull){
+                window.location.href= 'local_storage.html';
+            }
+        }
+        function validateForm() {
+        let result = true;
+
+        var firstname = document.forms["frm2"]["firstname"].value;
+        var lastname = document.forms["frm2"]["lastname"].value;
+        var yearofbirth = document.forms["frm2"]["yearofbirth"].value;
+        var gender = document.getElementById("Gender").value;
+        var phone = document.forms["frm2"]["phone"].value;
+        var skype = document.forms["frm2"]["skype"].value;
+
+        var firstnameRegex = /^[A-Za-z]{1,20}$/;
+        var yearRegex = /^(19\d\d|20\d\d|2100)$/;
+        var phoneRegex = /^[\d\s()-]{10,12}$/;
+
+        var wrongfirstname = document.getElementById("wrongfirstname");
+        var wronglastname = document.getElementById("wronglastname");
+        var wrongdate = document.getElementById("wrongdate");
+        var wrongphone = document.getElementById("wrongphone");
+        var wrongskype = document.getElementById("wrongskype");
+
+        if (!firstnameRegex.test(firstname)) {
+            wrongfirstname.style.display = 'block';
+            result = false;
+        } else {
+            wrongfirstname.style.display = 'none';
+        }
+
+        if (!firstnameRegex.test(lastname)) {
+            wronglastname.style.display = 'block';
+            result = false;
+        } else {
+            wronglastname.style.display = 'none';
+        }
+
+        if (!yearRegex.test(yearofbirth)) {
+            wrongdate.style.display = 'block';
+            result = false;
+        } else {
+            wrongdate.style.display = 'none';
+        }
+
+        if (phone !== "" && !phoneRegex.test(phone)) {
+            wrongphone.style.display = 'block';
+            result = false;
+        } else {
+            wrongphone.style.display = 'none';
+        }
+
+        localStorage.setItem("firstname", firstname);
+        localStorage.setItem("lastname", lastname);
+        localStorage.setItem("yearofbirth", yearofbirth);
+        localStorage.setItem("gender", gender);
+        localStorage.setItem("phone", phone);
+        localStorage.setItem("skype", skype);
+
+        if(result){
+            alert("Data was saved");
+        }
+    }
+
+    </script>
+</body>
+</html>
