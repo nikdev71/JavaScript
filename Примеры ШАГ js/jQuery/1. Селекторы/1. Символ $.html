@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery</title>
+    <script src="jquery-3.7.0.min.js">
+    </script>
+    <script>
+        function start() {
+            // Изменим содержимое абзаца с id="change_jQuery" с помощью jQuery
+            $("#change_jQuery").html("<strong>Данное содержимое было изменено с помощью jQuery.</strong>");
+            // Изменим содержимое абзаца с id="change_JavaScript" с помощью JavaScript
+            document.getElementById("change_JavaScript").innerHTML =
+                "<strong>Данное содержимое было изменено с помощью JavaScript.</strong>";
+        }
+    </script>
+</head>
+
+<body onload="start()">
+    <p id="change_jQuery">Абзац, содержимое которого будет изменено.</p>
+    <p id="change_JavaScript">Абзац, содержимое которого будет изменено. </p>
+</body>
+
+</html>

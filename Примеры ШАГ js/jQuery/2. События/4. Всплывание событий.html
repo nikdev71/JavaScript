@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery</title>
+    <script src="jquery-3.7.0.min.js">
+    </script>
+    <script>
+        $(document).ready(function () {  // Предотвращение преждевременного выполнения кода в jQuery
+            $('div').bind('click', function (e) {
+                alert('Событие инициировал элемент ' + e.target.style.backgroundColor);
+                alert('Событие обрабатывается для элемента ' + e.currentTarget.style.backgroundColor);
+                e.stopPropagation();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div style="width: 300px; height: 300px; background-color: blue;" id="div1">
+        <div style="width: 200px; height: 200px; background-color: yellow;" id="div2">
+            <div style="width: 100px; height: 100px; background-color: magenta;" id="div3">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

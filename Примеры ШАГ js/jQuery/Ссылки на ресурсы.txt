@@ -1,0 +1,4 @@
+http://www.w3schools.com/jquery/jquery_examples.asp
+http://jquery-docs.ru/Selectors/
+http://www.wisdomweb.ru/
+

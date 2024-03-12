@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <style>
+        #container{
+            font-family: sans-serif;
+            background-color: rgb(252, 238, 194);
+            padding: 1em 2em;
+            width: 400px;
+        }
+        #container label{
+            margin: 5px 0;
+        }
+    </style>
+    <script>
+        $(document).ready(function (){
+            $('#rnd').click(function() {
+                var length = parseInt($('input[type="text"]').val());
+                var allowedChars = '';
+                
+                $('input[type="checkbox"]:checked').each(function() {
+                    switch($(this).val()) {
+                        case 'Number':
+                            allowedChars += '0123456789';
+                            break;
+                        case 'Uppercase':
+                            allowedChars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                            break;
+                        case 'Lowercase':
+                            allowedChars += 'abcdefghijklmnopqrstuvwxyz';
+                            break;
+                    }
+                });
+
+                var result = '';
+                for (var i = 0; i < length; i++) {
+                    var randomIndex = Math.floor(Math.random() * allowedChars.length);
+                    result += allowedChars.charAt(randomIndex);
+                }
+
+                $('input[type="text"]').last().val(result);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h3>Random string generator</h3>
+        <p>String should be <input type="text" style="width: 20px;"> characters length</p>
+        <p>Which character are allowed to occur in the string</p> 
+        <input type="checkbox" name="character" value="Number"><label for="">Numeric Character 0-9</label><br>
+        <input type="checkbox" name="character" value="Uppercase"><label for="">Uppercase letters [A-Z]</label><br>
+        <input type="checkbox" name="character" value="Lowercase"><label for="">Lowercase letters [a-z]</label><br>
+        <input type="button" value="Generate" id="rnd">
+        <hr>
+        <p style="display: inline;">Result:</p><input type="text" readonly>
+    </div>
+</body>
+</html>

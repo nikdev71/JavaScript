@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #page-container {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+        .col{
+            height: 100%;
+        }
+        #firstcol{
+            width: 30%;
+        }
+        .col.s{
+            width: 1%;
+        }
+        .g{
+            background-color: lightgrey;
+        }
+        #arrow{
+            position: relative;
+            overflow: hidden;
+        }
+        #triangle{
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            transform: rotate(45deg);
+            right: -60%;
+            top: 50%;
+            background-color: black;
+        }
+        #secondcol{
+            width: 69%;
+        }
+        #up1{
+            width: 100%;
+            height: 60%;
+            background-color: #1d2c49;
+        }
+        #up2{
+            height: 38%;
+            width: 100%;
+            background-color: #c16fa7;
+        }
+        #down1{
+            width: 100%;
+            height: 38%;
+            background-color: #423c64;
+        }
+        #down2{
+            height: 60%;
+            width: 100%;
+            background-color: #775284;
+        }
+        .slider{
+            background-color: lightgrey;
+            width: 100%;
+            height: 2%;
+            text-align: center;
+            font-size: 20px;
+            user-select: none;
+        }
+    </style>
+    <script>     
+        $(document).ready(function (){
+            let openclose = true;
+
+            $("#arrow").click(function(){
+                if(openclose){
+                    $("#firstcol").css("width","0%")
+                    $("#secondcol").css("width","99%")
+                    $("#triangle").css("right","60%")
+                    openclose= false;
+                }
+                else {
+                    $("#firstcol").css("width","30%")
+                    $("#secondcol").css("width","69%")
+                    $("#triangle").css("right","-60%")
+                    openclose= true;
+                }
+
+            })
+
+            let isDragging = false;
+            let isDragging2 = false;
+            
+            $("#slider1").mousedown(function(event){
+                isDragging = true;
+            });
+            $("#slider2").mousedown(function(event){
+                isDragging2 = true;
+            });
+            $(document).mouseup(function() {
+                isDragging = false;
+                isDragging2 = false;
+            });
+            
+            $(document).mousemove(function(event){
+                const mouseY = event.clientY;
+                if(mouseY <100 || mouseY > window.innerHeight - 100){
+                    return;
+                }
+                if(isDragging){
+                    const upDiv = $('#up1');
+                    const downDiv = $('#down1');
+                    const downHeight = downDiv.offset().top + downDiv.height() - mouseY;
+                    
+                    upDiv.height(mouseY);
+                    downDiv.height(downHeight);
+                    $('#slider1').css('top', mouseY );
+                }
+                if(isDragging2){
+                    const upDiv = $('#up2');
+                    const downDiv = $('#down2');
+                    const downHeight = downDiv.offset().top + downDiv.height() - mouseY;
+                    
+                    upDiv.height(mouseY);
+                    downDiv.height(downHeight);
+                    $('#slider2').css('top', mouseY);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="page-container">
+        <div id="firstcol" class="col f">
+            <div id="up1"></div>
+            <div id="slider1" class="slider">=</div>
+            <div id="down1"></div>
+        </div>
+        <div id="arrow" class="col s g"><div id="triangle"></div></div>
+        <div id="secondcol" class="col t">
+            <div id="up2"></div>
+            <div id="slider2" class="slider">=</div>
+            <div id="down2"></div>
+        </div>
+    </div>
+</body>
+</html>
