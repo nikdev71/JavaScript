@@ -71,5 +71,4 @@ $(document).ready(function(){
 
     shufflePlates();
     updateBoard();
-
 })

@@ -4,6 +4,7 @@ body{
     flex-direction: column;
     align-items: center;
     background-color: rgb(22, 22, 22);
+    font-family: sans-serif;
 }
 img{
     width: 40%;
@@ -18,4 +19,87 @@ img{
 #carousel img{
     width: 17%;
     cursor: pointer;
+}
+
+
+main{
+    width: 80%;
+    margin: auto;
+    padding: 1em;
+    border: 2px solid grey;
+    border-radius: 16px;
+    text-align: center;
+    color: lightgrey;
+}
+#header button{
+    padding: 1em 3em;
+    font-size: 18px;
+    text-transform: uppercase;
+    border-radius: 25px;
+    border: 1px solid grey;
+    background-color: green;
+}
+
+#cards-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.card {
+    width: 15% ; 
+    height: 200px;
+    margin: 5px;
+    background-color: dimgrey;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+    position: relative; 
+    overflow: hidden; 
+}
+
+.card img {
+    width: 190px;
+    height: 190px;
+    object-fit: cover;
+    border: none;
+}
+
+.card .back, .card .front {
+    left: 10px;
+    top: 0;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 0.5s ease; 
+}
+
+.card .back {
+    background-color: black;
+    transform: rotateY(0deg);
+    left: 0px;
+    width: 110%;
+    height: 100%;
+}
+
+.card .front {
+    transform: rotateY(180deg);
+}
+
+.card.open .back {
+    transform: rotateY(0deg); 
+}
+
+.card.open .front {
+    transform: rotateY(-180deg); 
+}
+
+.card.matched {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+#dialog{
+    display: none;
 }
