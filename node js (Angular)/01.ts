@@ -72,7 +72,7 @@ type Gallery={
     drag: ()=>void
 }
 
-const gallery1 = {
+const gallery1 : Gallery = {
     title: "Галерея 1",
     loop: true,
     item: 10,
@@ -82,7 +82,7 @@ const gallery1 = {
     }
 };
 
-const gallery2 = {
+const gallery2 : Gallery = {
     title: "Галерея 2",
     loop: false,
     item: 15,
@@ -91,3 +91,5 @@ const gallery2 = {
         console.log(`Title:${this.title} \n Loop:${this.loop} \n Item: ${this.item} `);
     }
 };
+
+
