@@ -1,0 +1,76 @@
+{
+  "questions": [
+    {
+      "question": "Какой метод используется для добавления нового элемента в конец массива?",
+      "options": [".push()", ".pop()", ".join()", ".slice()"],
+      "correctAnswer": "LnB1c2goKQ==",
+      "type": "radio"
+    },
+    {
+      "question": "Какие методы используются для работы с массивами в JavaScript?",
+      "options": ["pop()", "unshift()", "splice()", "concat()"],
+      "correctAnswer": "cG9wKCl1bnNoaWZ0KClzcGxpY2UoKQ==",
+      "type": "checkbox"
+    },
+    {
+      "question": "Какие из перечисленных типов данных являются примитивными в JavaScript?",
+      "options": ["int", "string", "object", "undefined"],
+      "correctAnswer": "c3RyaW5nb2JqZWN0dW5kZWZpbmVk",
+      "type": "checkbox"
+    },
+    {
+      "question": "Какой метод используется для удаления элемента с определенным индексом из массива?",
+      "options": [".splice()", ".slice()", ".filter()", ".indexOf()"],
+      "correctAnswer": "LnNwbGljZSgp",
+      "type": "radio"
+    },
+    {
+      "question": "Какая функция используется для преобразования строки в число?",
+      "options": ["parseInt()", "parseFloat()", "Number()", "allOfTheAbove"],
+      "correctAnswer": "YWxsT2ZUaGVBYm92ZQ==",
+      "type": "radio"
+    },
+    {
+      "question": "Какой оператор используется для сравнения значений и их типов?",
+      "options": ["==", "===", "!=", "!=="],
+      "correctAnswer": "PT09",
+      "type": "radio"
+    },
+    {
+      "question": "Какой цикл используется для выполнения кода определенное количество раз?",
+      "options": ["for", "while", "do...while", "forEach"],
+      "correctAnswer": "Zm9y",
+      "type": "radio"
+    },
+    {
+      "question": "Какой метод используется для разделения строки на подстроки?",
+      "options": [".split()", ".slice()", ".substring()", ".substr()"],
+      "correctAnswer": "LnNwbGl0KCk=",
+      "type": "radio"
+    },
+    {
+      "question": "Какое событие возникает, когда пользователь кликает на элементе?",
+      "options": ["mouseover", "click", "keydown", "scroll"],
+      "correctAnswer": "Y2xpY2s=",
+      "type": "radio"
+    },
+    {
+      "question": "Какой оператор используется для объединения двух или более строк?",
+      "options": ["+", "-", "*", "/"],
+      "correctAnswer": "Kw==",
+      "type": "radio"
+    },
+    {
+      "question": "Какой метод используется для преобразования элементов массива в строку?",
+      "options": [".join()", ".toString()", ".concat()", ".slice()"],
+      "correctAnswer": "LmpvaW4oKQ==",
+      "type": "radio"
+    },
+    {
+      "question": "Какой метод используется для определения длины массива?",
+      "options": [".length()", ".size()", ".count()", ".len()"],
+      "correctAnswer": "Lmxlbmd0aCgp",
+      "type": "radio"
+    }
+  ]
+}

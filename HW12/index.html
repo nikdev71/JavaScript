@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <style>
+        form{
+            width: 400px;
+            border: 1px solid black;
+            border-radius: 26px;
+            margin: 2%;
+            padding: 1%;
+            display: flex;
+            flex-wrap: wrap;
+            font-family: sans-serif;
+            
+        }
+        form h4{
+            width: 50%;
+            margin: 0 35%;
+            margin-bottom: 1%;
+        }
+        #left{
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        #left label{
+            margin-top: 4.5%;
+            margin-right: 3%;
+        }
+        #right{
+            width: 50%;
+        }
+        #right input{
+            margin-top: 3%;
+            display: flex;
+            flex-direction: column;
+
+        }
+        .row {
+            display: flex;
+        }
+        table{
+            width: 200px;
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid grey;
+            padding: 8px;
+            text-align: left;
+        }
+        #test{
+            margin-top: 5%;
+            font-family: sans-serif;
+        }
+        #test input[type="radio"]{
+            margin: 0.5% 0;
+            display: none;
+        }
+        #nextQuest{
+            display: none;
+        }
+        #time{
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+      <diV id="test">
+        <h2>Тест по javascript</h2>
+        <input type="button" value="начать" id="startTest"><br>
+        <label for="" value="Question" id="question"></label><br>
+        <div style="display: flex;"><input type="radio" name="answer"><label for="" style="margin: 0.3% 0 0 0.5%"></label></div>
+        <div style="display: flex;"><input type="radio" name="answer"><label for="" style="margin: 0.3% 0 0 0.5%"></label></div>
+        <div style="display: flex;"><input type="radio" name="answer"><label for="" style="margin: 0.3% 0 0 0.5%"></label></div>
+        <div style="display: flex;"><input type="radio" name="answer"><label for="" style="margin: 0.3% 0 0 0.5%"></label></div>
+        <label id="time" style="display: none; margin-bottom: 1%;"></label>
+        <div style="display: flex;"><input type="button" value="Принять" id="nextQuest">
+    </div>
+        <script>
+            let questions=[];
+            $(function(){
+                $.getJSON("questions.json",function(data){
+                    for (let i = 0; i < data.questions.length; i++) {
+                        questions.push(data.questions[i]);
+                        console.log(questions[i])
+                    }
+                    })
+                })
+       
+            var name1 =null;
+            startTest.addEventListener("click", (e)=>
+            {
+                name1 = prompt("Введите имя")
+
+
+                e.target.style.display = 'none'
+                nextQuest.style.display = 'block'
+
+                question.style.display = 'block';
+                let inputs = document.querySelectorAll('#test input[type="radio"]');
+
+                let numberOfQuestion = 0;
+                let personCorrectAnswers = 0;
+    
+                question.textContent = numberOfQuestion+1+" "+ questions[numberOfQuestion].question;
+
+                for (let i=0; i<4;i++) {
+                    inputs[i].style.display = 'block'
+                    inputs[i].value = questions[numberOfQuestion].options[i]; 
+                    inputs[i].nextSibling.textContent = questions[numberOfQuestion].options[i];
+                }
+
+                
+
+                let sec = 29;
+                let intervalId;
+
+                clearInterval(intervalId)
+                startTimer();
+
+                function startTimer() {
+                    intervalId = setInterval(TimeAnswer, 1000);
+                    time.style.display = 'block';
+                    time.textContent = "0:" + 30;
+                }
+
+                function TimeAnswer() {
+                    time.textContent = "0:" + sec;
+                    sec--;
+                    if (sec < 0) {
+                        clearInterval(intervalId);
+                        NextQuestion();
+                    }
+                }
+                
+                function NextQuestion(){
+                    let encode;
+                    let multians="";
+                    let flag=false;
+                    for (let i=0; i<4;i++){
+                        if(inputs[i].checked) 
+                        {
+                            if(inputs[i].type!='checkbox'){
+                                encode = btoa(inputs[i].value)
+                               
+                            }
+                            else{
+                                flag=true;
+                                multians += inputs[i].value
+                            }
+                           
+                        }
+                    }
+                    if(!flag)
+                    {
+                        if(encode === questions[numberOfQuestion].correctAnswer)
+                        {
+                            personCorrectAnswers++;
+                        }
+                    }
+                    else{
+                        multians = btoa(multians);
+                        console.log(encode)
+                        if(multians === questions[numberOfQuestion].correctAnswer)
+                        {
+                            personCorrectAnswers++;
+                        }
+                    }
+
+
+                    numberOfQuestion++;
+                    {
+                        if(numberOfQuestion === questions.length)
+                        {
+                            alert(name1+", Вы сдали тест на " +personCorrectAnswers + " балов")
+                            e.target.style.display = 'block'
+                            nextQuest.style.display = 'none'
+
+                            question.style.display = 'none';
+                            for (let i=0; i<4;i++) {
+                            inputs[i].style.display = 'none';
+                            inputs[i].nextSibling.textContent = "";
+                            }
+                            clearInterval(intervalId);
+                            time.style.display = 'none';
+                            return;
+                        }
+                        question.textContent = numberOfQuestion+1+" "+questions[numberOfQuestion].question;
+
+                        for (let i=0; i<4;i++) {
+                            inputs[i].style.display = 'block'
+                            inputs[i].value = questions[numberOfQuestion].options[i]; 
+                            inputs[i].nextSibling.textContent = questions[numberOfQuestion].options[i];
+                            inputs[i].type = questions[numberOfQuestion].type;
+                        }
+                    }
+                    clearInterval(intervalId);
+                    sec = 29;
+                    startTimer();
+                }
+
+                nextQuest.addEventListener("click", ()=>
+                {
+                    NextQuestion();
+                });
+                
+            })
+    </script>
+</body>
+</html>
