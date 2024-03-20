@@ -1,0 +1,450 @@
+// проверки и установка
+node  -v
+npm  -v
+npm install -g @angular/cli
+_____________
+получилось установить Angular на мак с коммандой
+$ sudo npm install -g @angular/cli
+_____________
+<!-- см. form-r_v2_addService
+test1 и 2-е задание products-->
+
+ng --version   или ng v
+ng help
+
+// создать новый проект
+ng new my-app
+или
+// в 17-й но...
+ng new my-app --no-standalone
+//standalone / автономный не зависят от какого-либо «промежуточного контекста» NgModule
+https://angular.io/guide/standalone-components
+
+// перейти в папку проекта
+cd my-app
+
+// запуск
+ng serve     
+или 
+ng serve –o 
+
+ctrl+C остановить
+
+// создание компонента
+ng generate component hello-world
+или  сокращенная запись
+ng g c hello-world
+
+// задаем и используем селектор - способы
+selector: 'app-header',
+<app-header></app-header>
+
+selector: '[app-header]',
+<div app-header></div>
+
+selector: '.app-header',
+<div class="app-header"></div>
+
+// Переменные
+export ...{
+  userName = 'super';
+  // или
+  userName: string = 'super';
+  ...
+  starChange = true;
+   showMessage(){
+    this.startChange = false;
+  } 
+  ...
+}
+
+
+//******Структурные директиы *ngIf, *ngFor
+
+// *ngIf
+// отобразить или спрятать элемент при определенном состоянии
+// h2 будет добавлен на страницу только если  isTitle = true
+<h2 *ngIf="isTitle">Lorem ipsum.</h2>
+// может быть и обратная проверка !
+<h2 *ngIf="!isTitle">Lorem ipsum.</h2>
+
+//else
+<p *ngIf="!addCarStatus; else succesStatus">Машина не добавлена</p>
+<ng-template #succesStatus>
+  <p>Машина добавлена</p>
+</ng-template>
+
+
+*ngFor
+// products - объект в products.ts
+// share() описана в product-list.component.ts
+<h2>Products</h2> 
+<div *ngFor="let product of products">
+  <h3>
+    <a [title]="product.name + ' details'">{{ product.name }}</a>
+  </h3> 
+  <p *ngIf="product.description">Description: {{ product.description }}</p>
+  <button (click)="share()">Share</button>
+</div>
+
+// если нужен inex
+<div *ngFor="let product of products; let i = index"></div>
+
+Компоненты определяют области ответственности в пользовательском интерфейсе, которые позволяют повторно использовать эти наборы функций пользовательского интерфейса. 
+
+// Назначение обработчика события
+<a (click)="showMessage()">Ok</a>
+//Описание метода name.component.ts  в 
+export ...{
+  showMessage(){
+    console.log('Ok');
+  } 
+}
+
+// Обработчик события передача event
+<button (click)="showMess($event)"></button>
+// в export ...{
+  showMess(event:Event){}
+}
+
+//можно передать элемент
+<li *ngFor="let item of items" 
+(click)= "onSelect(item)">
+{{item.id}}: {{item.name}}
+</li>
+// в export ...{
+  onSelect(item:Object){
+    console.log(item)
+  }
+}
+
+
+//****** Data Binding ******
+https://metanit.com/web/angular2/2.5.php
+Interpolation{{ }}
+Property binding[ ]
+Event binding( )
+
+// **Interpolation{{ }}
+// Интерполяция выражения  
+<i>{{ 55476/(24*60/60) }}</i>
+
+// интерполяция переменных в html-код
+<h2>{{userName}}</h2>
+
+// инетрполяция результата функции
+<h2>{{showMes()}}</h2>
+// описание ф-ции
+export class..{
+  showMes(){
+  return 'Привет '+ this.userName;
+}
+}
+
+// ** Data Binding - Property binding[ ] - на атрибуты
+// иожно управлять доступностью кнопки через атрибут disabled
+<button [disabled] = "isSale">Sale</button>
+export ..{ isSale = true; }
+// возможен вариант с инерсией
+<button [disabled] = "!isSale">Sale</button>
+<!--если написать <button disabled = {{"!isSale"}}>Sale</button> применится только 
+  1 раз, не будет динамической зависимости от переменной -->
+
+// Динамическое назначение стилей
+// ngStyle пример для ngFor
+<li [ngStyle]="{backgroundColor: (i+1)%2 === 0 ? 'red' : 'gray'; color : 'white'}"></li>
+или
+<li [ngStyle]="{'background-color': (i+1)%2 === 0 ? 'red' : 'gray'; 'color' : 'white'}"></li>
+
+
+
+//Динамическое добавление класса по условию name.component.ts
+// name-class - название класса, startChange - переменная (м.б ф-ция()) со значением true/false
+  <h2 [ngClass]="{'name-class':startChange}"></h2>
+   в стилях может потребоваться !important
+   color: red!important;
+
+// второй вариант динам добавления класса
+// вместо true м.б. имя переменной
+<h2 [class.name-class]="true"></h2>
+
+// вариант с использованием ф-ции. Добавлять класс если название машины больше 4-х символов
+// ф-ция будет возращать true или false
+<li *ngFor="let car of cars">...
+  <div [ngClass]="{'big': setBig(car)}"></div>
+  ...
+</li>
+
+
+ // для работы с формами в app.moule.ts
+ import { FormsModule } from '@angular/forms';
+ @NgModule({
+  ...
+  imports: [
+    ...
+    FormsModule,
+    ...
+  ],
+  ...
+})
+
+
+// двусторонняя привязка (two-way binding) 
+// должен быт подключен модуль FormsModule 
+<input type="text" [(ngModel)]="mess">
+<h2>{{mess}}</h2>
+// mess - переменная д.б. объялена в классе
+// в export ...{
+  mess : string = "Текст";
+}
+
+// Пайпы для трансформации даных
+https://angular.io/guide/pipes
+// Пайп для отображения | uppercase  - принимает в себя только строки
+<h2>{{name | uppercase}}</h2>
+<h2>{{currentDate | data}}</h2>
+<h2>{{currentDate | date:'short'}}</h2>
+<h2>{{currentDate | date:'MM/dd/yy'}}</h2>
+<h2>{{  birthday | date:'fullDate' | uppercase}}</h2>
+
+//pipe
+//https://angular.io/guide/template-syntax#template-expression-operators
+jsonКанал особенно полезен для отладки Привязок:
+
+src / app / app.деталь.HTML
+content_copy
+<p>Item json pipe: {{item | json}}</p>
+Сгенерированный вывод будет выглядеть примерно так:
+
+content_copy
+{ "name": "Telephone",
+  "manufactureDate": "1980-02-25T05:00:00.000Z",
+  "price": 98 }
+
+
+
+
+// роутинг - маршрутизация (переход по ссылкам)
+// импортируем модуль и класс Routes
+in src/app/app.module.ts
+import { Routes, RouterModule } from '@angular/router';
+
+// создать константу для хранения массива маршрутов можно переменную, можно класс
+// localhost:4200
+// localhost:4200/about
+//...
+const appRoutes: Routes = [
+  {path: '', component: HomeComponent},
+  {path: 'about', component: AboutComponent},
+  {path: 'news', component: NewsComponent},
+  {path: '**', component: NotFoundComponent},
+]
+
+@NgModule({
+  ...
+  imports: [
+    ...,
+    RouterModule.forRoot(appRoutes)
+  ],
+  ...
+})
+
+// in src/app/app.component.html
+<nav>
+  <a routerLink="">Главная</a>
+  <a routerLink="/about">О нас</a>
+  <a routerLink="/news">Новости</a>
+</nav>
+// компонент, который будет заменен на компонент подгружаемый по определенному роутеру
+<router-outlet></router-outlet>
+
+
+//**** подключение bootstrap
+<!-- флаг -s 
+чтобы bstr сохранился как зависимость для разработки -->
+npm install bootstrap -s
+
+ в angular.json (см путь аккуратно в разных версиях м.б node_modules, м.б. ../node_modulres)
+ "styles": [
+   "node_modules/bootstrap/dist/css/bootstrap.min.css",
+   "src/styles.css",
+ ],
+или
+//в styles
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+//**** подключение Font Awesome
+//https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/include-font-awesome.md
+npm install --save font-awesome
+Using CSS
+// in angular.json
+"build": {
+  "options": {
+    "styles": [
+      "node_modules/font-awesome/css/font-awesome.css",
+      "src/styles.css"
+    ],
+  }
+}
+ или в css
+@import '~font-awesome/css/font-awesome.css';
+
+или посмотреть
+https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers
+подключение sass см. там же
+
+
+
+// Публикация
+//в корневом каталоге вашего проекта.
+//Сайт будет создан в каталоге dist, и вы можете развернуть его на любом веб-сервере.
+ng build 
+// если у вас есть производственные настройки в вашем приложении, вы должны использовать
+// создаст проект в каталоге dist, и его можно будет нажать на сервер.
+ng build --prod
+
+
+
+/////////
+// ?очистите кеш на всякий случай: npm cache clean
+
+// pipe search
+https://www.youtube.com/watch?v=QXC5vNjVh2E&list=PLD-piGJ3Dtl2WotoOks4_bWOv5wvrtOG_&index=6
+
+// у меня есть компонент provider
+// в provider.component.ts есть массив
+// обычно это будет внешний ts файл c массивом объектов, см. pr1_03_ngFor_.pdf
+export class ProviderComponent implements OnInit {
+  names: string[];
+  searchStr : string = "Текст";  /*переменная для связывания c input*/
+  constructor() { 
+    this.names = [' Матрица ', ' Elektron ', ' Sofportal ', ' VELLOPT '];
+  }
+}
+
+Создать pipe с именем search в  папке app 
+ng g p search
+
+Зайти в search.pipe.ts и подкорректироать export
+names -  имя массива (у меня массив из provider компоннта)
+value - значение из input
+
+export class SearchPipe implements PipeTransform {
+  transform(names, value) {
+    return names.filter( name =>{
+      //includes проверяет есть ли в строке значение true - есть
+      return name.includes(value);
+    });
+  }
+}
+
+если pipe не в app компоненте, а например в provider.component.ts
+добавить импорт pipe
+import { SearchPipe } from '../search.pipe';
+
+//подключить в html pipe | search:searchStr 
+// search -имя
+// searchStr - переменная для связки с input
+ 
+  <input type="text" [(ngModel)]="searchStr">
+  <h2> поиск{{searchStr}}</h2>
+  <h3 *ngFor= "let name of names | search:searchStr" >Hello {{ name }}</h3>
+
+
+  // **** Передача данных в дочерний компонент
+https://metanit.com/web/angular2/2.7.php
+  
+  https://angular.io/guide/template-syntax#how-to-use-input
+  https://www.youtube.com/watch?v=b69XQI8CRYE&list=PLLvTAhHe8AYCflB7fv79TU9Y6WK52L8nb&index=14
+  https://www.youtube.com/watch?v=jnvZqj1LVi4&list=PLD-piGJ3Dtl2WotoOks4_bWOv5wvrtOG_&index=3     см.5-38
+
+  //в родительском компоненте в .ts
+  export class ... {
+    title = 'Значение переменной или объект';
+  }
+  
+  //в родительском компоненте в .html при подключении дочернего
+  // [title] - название переменной, за которой нужно будет наблюдать внутри компонента
+  //  ="title" передаем значение свойства 
+  <app-mentioned [title]="title"></app-mentioned>
+
+  // в дочернем компоненте в .ts
+  // добавить Input в import
+  import { Component, OnInit, Input } from '@angular/core';
+  // добавить декоратор Input, если несколько переменных - несколько Input 
+  export class ... { 
+    @Input() title;
+    ...
+  }
+  // в дочернем компоненте в .html
+  <h1>{{title}}</h1>
+
+
+  //**** Получение данных из компонента
+  https://angular.io/guide/template-syntax#how-to-use-output
+  https://angular.io/start#output
+  https://www.youtube.com/watch?v=u7w0JF411_8&list=PLLvTAhHe8AYCflB7fv79TU9Y6WK52L8nb&index=15
+  // в дочернем компоненте в .ts
+  // добавить Output, EventEmitter в import
+  // EventEmitter для создания пользовательских событий и регистрации обработчиков для этих событий
+  import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+  // добавить декоратор Output, result - переменная(массив, объект)
+  export class ... { 
+     @Output() result = new EventEmitter();
+    ...
+  }
+  // в дочернем компоненте в .html
+  <button (click)="result.emit()">Notify Me</button>
+  
+   //в родительском компоненте в .ts
+   export class ... { 
+     onResult() {
+         window.alert('Нажата кнопка в дочернем компоненте');
+    }
+    ...
+  }
+  //в родительском компоненте в .html при подключении дочернего
+  <app-mentioned  (result)="onResult()"></app-mentioned>
+
+
+  //Template reference variable considerations
+  //Ссылка на ссылочную переменную шаблона
+  https://angular.io/guide/template-syntax#template-reference-variables-var
+
+  <input #phone placeholder="phone number" />
+  или
+  //Вы можете использовать ref-альтернативный префикс #. Этот пример объявляет faxпеременную как ref-faxвместо #fax.
+  <input ref-fax placeholder="fax number" />
+  <button (click)="callFax(fax.value)">Fax</button>
+  
+
+
+Урок 4. Сервер и сервисы в Angular 4
+Данные на сервере
+  https://randomuser.me/api/?inc=gender,name,picture,location&result=8&nat=gb
+
+  https://angular.io/tutorial/toh-pt4
+  https://webdraftt.com/tutorial/angular-services
+  Сервисы-отличный способ поделиться информацией между классами, которые не знают друг друга . 
+
+Создать сервис  с именем users
+  ng g s users
+
+
+
+
+  Любая сущность в Angular - это класс
+
+
+  https://github.com/angular/angular-cli/tree/master/docs/documentation/stories   
+  https://github.com/angular/angular-cli/tree/master/docs
+
+  Подключение owl-carusel
+  https://www.npmjs.com/package/ngx-owl-carousel
+  https://stackoverflow.com/questions/51495751/how-can-i-use-jquery-owlcarousel-in-angular-4-project
+
+
+  
+
+

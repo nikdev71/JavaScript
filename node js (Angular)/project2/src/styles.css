@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+.container{
+    font-family: sans-serif;
+    margin: 20px auto;
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin: 0 auto;
+  }
+  .item {
+    margin-right: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .item img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .item h2 {
+    margin-top: 10px;
+    font-size: 24px;
+  }
+  
+  .item p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #666;
+  }
+  .provider-container {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: sans-serif;
+    justify-content: space-between;
+    width: 60%;
+    margin: 0 auto;
+    height: 100px;
+  }
+  
+  .provider-container h3 {
+    background: rgba(85, 85, 85, 0.5);
+    border:1px solid black;
+    text-align: center;
+    padding-top: 20px;
+    flex-basis: 24%;  
+  }

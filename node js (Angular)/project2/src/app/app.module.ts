@@ -3,12 +3,16 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NewsComponent } from './news/news.component';
+import { SeeWorldComponent } from './see-world/see-world.component';
+import { DealsComponent } from './deals/deals.component';
+import { ProviderComponent } from './provider/provider.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NewsComponent
+    SeeWorldComponent,
+    DealsComponent,
+    ProviderComponent
   ],
   imports: [
     BrowserModule,

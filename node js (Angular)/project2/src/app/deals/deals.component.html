@@ -1,0 +1,14 @@
+<section >
+    <div  class="container">
+        <div class="row">
+            <h2>Deals & Destinations</h2>
+        </div>
+        <div class="row">
+            <div *ngFor="let deal of deals" class="item">
+                <img [src]="deal.src" alt="">
+                <h2>{{deal.title}}</h2>
+                <p>{{deal.text}}</p>
+            </div>
+        </div>
+    </div>
+</section>
