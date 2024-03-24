@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            Объект Promise служит связующим звеном между исполнителем и функциями-потребителями, 
+            которые получат либо результат, либо ошибку. 
+        */
+        function asyncDivision(number1, number2) {
+            const myPromise = new Promise(function (resolve, reject) { // Функция-исполнитель
+                // Исполнитель запускается автоматически, он должен выполнить работу, 
+                // а затем вызвать один из двух потребителей - resolve или reject.
+                console.log("Выполнение асинхронной операции");
+                setTimeout(() => {
+                    if (number2 == 0) {
+                        reject(new Error("Попытка деления на нуль: " + number1 + "/" + number2));
+                    }
+                    else {
+                        console.log("Результат деления: " + number1 / number2);
+                    }
+                }, 2000);
+            });
+            return myPromise;
+        }
+
+        // Функция-потребитель
+        const reject = function (error) {
+            console.error(error);
+        };
+
+        // Клиентская часть
+        const myPromise1 = asyncDivision(10, 0);
+        myPromise1.then(null, reject);
+
+        const myPromise2 = asyncDivision(10, 0);
+        myPromise2.catch(reject);
+
+    </script>
+</body>
+
+</html>

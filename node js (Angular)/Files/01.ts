@@ -92,4 +92,11 @@ const gallery2 : Gallery = {
     }
 };
 
+const enum UserRole {
+    Admin,
+    Author,
+    Redactor,
+    Subscrincle 
+}
+
 

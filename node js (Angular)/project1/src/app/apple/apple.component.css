@@ -1,0 +1,61 @@
+.iphone{
+    width: 50%;
+    margin: 5% auto;
+    border-radius: 16px;
+    font-family: sans-serif;
+    padding: 20px;
+}
+.iphone img{
+    width: 254px;
+    height: 468px;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block;
+}
+.colors {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2% auto;
+    padding: 5px 15px;
+    width: 38%;
+    height: 50px;
+    border: 1px solid #dcdcdc; 
+    border-radius: 25px;
+    background-color: #f2f2f7;
+}
+
+.color {
+    border-radius: 50%;
+    width: 40px; 
+    height: 40px; 
+    border: 1px solid grey; 
+    transition: 0.1s ease;
+}
+
+.color:hover{
+    box-shadow: 0 0 5px gray; 
+}
+.selected {
+    border: 2px solid #000;
+}
+
+.color.g {
+    background-color: #4cd964; 
+}
+
+.color.gr {
+    background-color: #8e8e93;
+}
+
+.color.p {
+    background-color: pink; 
+}
+
+.color.gold {
+    background-color: rgb(255, 255, 128); 
+}
+
+.color.b {
+    background-color: #4da3ff; 
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    /*
+      Ключевое слово async перед объявлением функции обязывает её всегда возвращать промис,
+      а также позволяет использовать await в теле этой функции.
+      Ключевое слово await заставит интерпретатор JavaScript ждать до тех пор, пока промис 
+      справа от await не выполнится. Это не отнимает ресурсов процессора. Пока промис не выполнится, 
+      JS-движок может заниматься другими задачами: выполнять прочие скрипты, обрабатывать события и т.п.
+    */
+        async function asyncDivision(number1, number2) {
+            console.log("Выполнение асинхронной операции");
+            if (number2 == 0) {
+                return new Error("Попытка деления на нуль: " + number1 + "/" + number2);
+            }
+            else {
+                return number1 / number2;
+            }
+        }
+
+        // Функции-потребители
+        const resolve = function (value) {
+            console.log(`Из промиса получены данные: ${value}`);
+        };
+        const reject = function (error) {
+            console.error(error);
+        };
+
+        // Клиентская часть
+        const myPromise1 = asyncDivision(10, 2);
+        myPromise1.then(resolve, reject);
+
+        const myPromise2 = asyncDivision(10, 0);
+        myPromise2.then(resolve, reject);
+
+    </script>
+</body>
+
+</html>

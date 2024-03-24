@@ -1,0 +1,17 @@
+.bold{
+    font-weight: bold;
+}
+.upper{
+    text-transform: uppercase;
+}
+.italic{
+    font-style: italic;
+}
+.underlined{
+    text-decoration: underline;
+}
+.btnsFlex{
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+}

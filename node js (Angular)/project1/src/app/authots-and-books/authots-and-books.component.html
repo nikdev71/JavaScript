@@ -1,0 +1,14 @@
+<div class="lib">
+    <ul>
+        <li *ngFor="let item of items" (click)= "onSelect(item)">
+            <b>{{item.author}}</b><br/>
+            {{item.title}}
+        </li> 
+    </ul>
+    <div class="currentBook">
+        <img [src]="currentBook.src" alt="">
+        <p><b>{{currentBook.author}}</b></p>
+        <p>{{currentBook.title}}</p>
+        <p class="description">{{currentBook.description}}</p>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<button *ngIf="isVisible" (click)="switchVisible()">+</button>
+<button *ngIf="!isVisible" (click)="switchVisible()">-</button>
+
+<p *ngIf="isVisible">
+    Hello World
+</p>
+
+<div [ngClass]="{btnsFlex:true}">
+    <button (click)="switchBold()" [ngClass]="{'bold': isBold}">B</button>
+    <button (click)="switchItalic()" [ngClass]="{'italic': isItalic}">I</button>
+    <button (click)="switchUnderlined()" [ngClass]="{'underlined': isUnderlined}">Ut</button>
+    <button (click)="switchToUpperCase()" [ngClass]="{'upper': isUpper}">Tt</button>
+    <select > 
+        <!-- (change)="changeFontSize($event.target.value)" -->
+        <option value="8">8</option>
+        <option value="12" selected>12</option>
+        <option value="16">16</option>
+        <option value="18">18</option>
+    </select>
+</div>
+<div>
+    <textarea [ngClass]="{
+        'bold': isBold,
+        'italic': isItalic,
+        'underlined': isUnderlined,
+        'upper': isUpper
+        }" 
+    [ngStyle]="{'font-size.px': fontSize}">
+    </textarea>
+</div>

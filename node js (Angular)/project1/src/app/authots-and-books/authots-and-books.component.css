@@ -1,0 +1,46 @@
+.lib{
+    display: flex;
+    width: 50%;
+    margin: 10% auto;
+    border-radius: 16px;
+    border: 1px solid grey;
+    font-family: sans-serif;
+    justify-content: space-between;
+}
+ul{
+    flex-basis: 40%;
+    list-style-type: none;
+}
+ul li{
+    border: 1px solid grey;
+    border-radius: 16px;
+    margin: 2% 0;
+    padding: 20px;
+    transition: 0.3s ease;
+}
+ul li:hover{
+    background-color: lightgray;
+}
+.currentBook{
+    width: 50%;
+    margin: 20px;
+    border: 1px solid grey;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+}
+.currentBook img {
+    width: 130px; 
+    height: 200px; 
+    background-color: lightgray;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+.description{
+    border-radius: 16px;
+    border: 1px solid lightslategray;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 14px;
+}

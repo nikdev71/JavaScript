@@ -1,0 +1,10 @@
+<div class="iphone">
+    <img [src]="currentColor.src" alt="">
+    <div class="colors" >
+        <div class="color gr" [ngClass]="{'selected':selected === 0}" (click)="SelectItem(0)"></div>
+        <div class="color g" [ngClass]="{'selected':selected === 1}" (click)="SelectItem(1)"></div>
+        <div class="color gold" [ngClass]="{'selected':selected === 2}" (click)="SelectItem(2)"></div>
+        <div class="color p" [ngClass]="{'selected':selected === 3}" (click)="SelectItem(3)"></div>
+        <div class="color b" [ngClass]="{'selected':selected === 4}" (click)="SelectItem(4)"></div>
+    </div>
+</div>
