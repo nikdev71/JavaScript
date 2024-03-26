@@ -20,15 +20,26 @@
         function reqReadyStateChange() {
             let myDiv = document.getElementById("myDivElement");
 
-            if (xmlHttp.readyState == 4) {
+            if (xmlHttp.readyState == 1) {
+                // Состояние запроса: 1 - идёт отправка запроса
+                myDiv.innerHTML += "Статус запроса: 1 - метод open() был вызван, но запрос еще не был отправлен методом send().<br />";
+            }
+            else if (xmlHttp.readyState == 2) {
+                //  Состояние запроса: 2 - запрос отправлен
+                myDiv.innerHTML += "Статус запроса: 2 - запрос был отправлен, заголовки и статус ответа получены и готовы к использованию.<br />";
+            }
+            else if (xmlHttp.readyState == 3) {
+                // Состояние запроса: 3 - идёт обмен
+                myDiv.innerHTML += "Статус запроса:  3 - идет обмен данными (часть данных уже получена).<br />";
+            }
+            else if (xmlHttp.readyState == 4) {
                 // Состояние запроса: 4 - выполнение запроса полностью завершено
                 if (xmlHttp.status == 200) {
                     try {
-                        let response = xmlHttp.response; // responseText: возвращает текст ответа сервера
-
-                        for (const prop of Object.entries(response)) {
-                            myDiv.innerHTML += prop[0] + ": " + prop[1] + "<br>";
-                        }
+                        let response = xmlHttp.responseText; // responseText: возвращает текст ответа сервера
+                        myDiv.innerHTML +=
+                            "Статус запроса: 4 - выполнение запроса полностью завершено. Все данные получены. <br />Сервер ответил: ";
+                        myDiv.innerHTML += response;
                     }
                     catch (e) {
                         myDiv.innerHTML += "Ошибка чтения ответа: " + e.toString();
@@ -49,16 +60,11 @@
                 try {
                     // Событие readystatechange возникает каждый раз, когда изменяется значение свойства readyState. 
                     xmlHttp.onreadystatechange = reqReadyStateChange;
-                    xmlHttp.open("GET", "countries.json", true);
-
-                    //Чтобы полученные данные автоматически были преобразованы в формат JSON
-                    xmlHttp.responseType = "json";
-
-                    xmlHttp.setRequestHeader("Accept", "application/json");    // принимаем только json
+                    xmlHttp.open("GET", "http://localhost:8080/AJAX/hello.txt", true);
                     xmlHttp.send();
                 }
                 catch (e) {
-                    alert(e.toString());
+                    console.log(e.toString());
                 }
             }
         }
@@ -67,6 +73,8 @@
 </head>
 
 <body onload="loadHandler()">
+    Привет, сервер!
+    <br />
     <div id="myDivElement"></div>
 </body>
 

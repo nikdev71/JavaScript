@@ -20,7 +20,7 @@
                     $('#countries').append('<option value="' + val + '">' + key + '</option>');
                 });
                 $('#countries').bind('change', function (e) {
-                    alert($("#countries option:selected").val());
+                    console.log($("#countries option:selected").val());
                 });
             });
         });

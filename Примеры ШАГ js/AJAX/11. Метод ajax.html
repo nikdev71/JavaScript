@@ -29,7 +29,7 @@
           },
           // Функция, код которой будет выполнен если во время исполнения запроса произойдет ошибка.
           error: function (jqXHR, statusText, error) {
-            alert(jqXHR.status + '\n' + statusText + '\n' + error);
+            console.log(jqXHR.status + '\n' + statusText + '\n' + error);
           }
         });
       });

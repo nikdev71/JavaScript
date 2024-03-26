@@ -11,7 +11,7 @@
 
 <body>
     <button>Отправить запрос</button>
-    <div id="div1"></div>
+    <div id="div1">1111</div>
 
     <script>
         /*
@@ -29,18 +29,19 @@
         $(function () {
             $('button').click(function () {
                 // Метод load позволяет загрузить данные с удаленного сервера и вставить их в содержимое выбранного элемента.
-                $('#div1').load("hello.txt", function (responseText, textStatus, xmlHttpRequest) {
-                    alert(responseText); // Содержит ответ сервера
-                    alert(textStatus); // Содержит статус выполнения запроса
-                    alert(xmlHttpRequest.status); // Содержит объект XMLHttpRequest
+                $('#div1').load("countries.json", function (responseText, textStatus, xmlHttpRequest) {
+                    $("#div1").html(responseText);
+                    console.log(responseText); // Содержит ответ сервера
+                    console.log(textStatus); // Содержит статус выполнения запроса
+                    console.log(xmlHttpRequest.status); // Содержит объект XMLHttpRequest
 
                     let status = xmlHttpRequest.status;//Содержит статусный код ответа HTTP, который пришел от сервера.
                     if (status == 200)
-                        alert("Текст ответа: " + xmlHttpRequest.responseText);
+                        console.log("Текст ответа: " + xmlHttpRequest.responseText);
                     else if (status == 404)
-                        alert("Ресурс не найден");
+                        console.log("Ресурс не найден");
                     else
-                        alert(xmlHttpRequest.statusText);
+                        console.log(xmlHttpRequest.statusText);
                 });
             });
         });

@@ -25,16 +25,16 @@
                 // Метод load позволяет загрузить данные с удаленного сервера и вставить их в содержимое выбранного элемента.
                 $("#myDivElement").load("http://localhost:8080/AJAX/GET-request.php", params,
                     function (response, textStatus, xmlHttpRequest) {
-                        alert("Текст ответа: " + response);
-                        alert("Статус выполнения запроса: " + textStatus);
-                        alert("Статусный код ответа HTTP: " + xmlHttpRequest.status);
+                        console.log("Текст ответа: " + response);
+                        console.log("Статус выполнения запроса: " + textStatus);
+                        console.log("Статусный код ответа HTTP: " + xmlHttpRequest.status);
 
                         if (xmlHttpRequest.status == 200)
-                            alert("Текст ответа: " + xmlHttpRequest.responseText);
+                            console.log("Текст ответа: " + xmlHttpRequest.responseText);
                         else if (status == 404)
-                            alert("Ресурс не найден");
+                            console.log("Ресурс не найден");
                         else
-                            alert(xmlHttpRequest.statusText);
+                            console.log(xmlHttpRequest.statusText);
                     });
             });
         });

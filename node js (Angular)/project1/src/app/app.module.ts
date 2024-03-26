@@ -9,6 +9,10 @@ import { FooterComponent } from './footer/footer.component';
 import { BtnComponent } from './btn/btn.component';
 import { AuthotsAndBooksComponent } from './authots-and-books/authots-and-books.component';
 import { AppleComponent } from './apple/apple.component';
+import { ParentComponent } from './parent/parent.component';
+import { ChildComponent } from './child/child.component';
+import { PetsComponent } from './pets/pets.component';
+import { PetsChildComponent } from './pets-child/pets-child.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { AppleComponent } from './apple/apple.component';
     FooterComponent,
     BtnComponent,
     AuthotsAndBooksComponent,
-    AppleComponent
+    AppleComponent,
+    ParentComponent,
+    ChildComponent,
+    PetsComponent,
+    PetsChildComponent
   ],
   imports: [
     BrowserModule,

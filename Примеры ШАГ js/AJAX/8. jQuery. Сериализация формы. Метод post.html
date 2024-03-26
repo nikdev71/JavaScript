@@ -21,6 +21,7 @@
 
             // Предотвращаем обычную отправку формы
             event.preventDefault();
+            console.log($("#loginForm").serialize());
             // Сериализация производится посредством метода serialize и в качестве результата создается объект javascript, 
             // в котором свойствам соответствуют поля формы
             let jqxhr = $.post('http://localhost:8080/AJAX/JSON.POST-request.php', $("#loginForm").serialize(),
@@ -28,9 +29,9 @@
                     $('#result').html("Логин: " + data.login + "<br />" + "Пароль: " + data.password);
                 }, 'json');
             jqxhr.fail(function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText); // Объект jqXHR - обертка над стандартным объектом javascript XMLHttpRequest 
-                alert(textStatus); // Содержит статус выполнения запроса
-                alert(errorThrown); // Описание ошибки
+                console.log(jqXHR.responseText); // Объект jqXHR - обертка над стандартным объектом javascript XMLHttpRequest 
+                console.log(textStatus); // Содержит статус выполнения запроса
+                console.log(errorThrown); // Описание ошибки
             });
         });
     </script>

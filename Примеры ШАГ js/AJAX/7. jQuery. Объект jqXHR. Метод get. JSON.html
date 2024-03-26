@@ -27,16 +27,16 @@
                 }
                 let jqxhr = $.get("http://localhost:8080/AJAX/JSON.GET-request.php", requestData,
                     function (data, status, jqXHR) {
-                        alert(data.response);
-                        alert(status);
+                        console.log(data.response);
+                        console.log(status);
                     }, 'json');
                 jqxhr.done(function (data) {
                     $('#myDivElement').html(data.response);
                 });
                 jqxhr.fail(function (jqXHR, textStatus, errorThrown) {
-                    alert(jqXHR.responseText); // Объект jqXHR - обертка над стандартным объектом javascript XMLHttpRequest 
-                    alert(textStatus); // Содержит статус выполнения запроса
-                    alert(errorThrown); // Описание ошибки
+                    console.log(jqXHR.responseText); // Объект jqXHR - обертка над стандартным объектом javascript XMLHttpRequest 
+                    console.log(textStatus); // Содержит статус выполнения запроса
+                    console.log(errorThrown); // Описание ошибки
                 });
             });
         });

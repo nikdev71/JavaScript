@@ -1,5 +1,5 @@
-/*
-Состояние запроса readyState представл¤ет собой число:
+﻿/*
+Состояние запроса readyState представляет собой число:
 1: метод open() был вызван, но запрос еще не был отправлен методом send()
 2: запрос был отправлен, заголовки и статус ответа получены и готовы к использованию
 3: идет обмен данными (часть данных уже получена)
@@ -14,30 +14,26 @@ function loadHandler() {
             let firstNumber = document.getElementById("firstNumber").value;
             let secondNumber = document.getElementById("secondNumber").value;
             let params = "firstNumber=" + firstNumber + "&secondNumber=" + secondNumber;
-            xmlHttp.open("POST", "http://localhost:8080/AJAX/POST-request.php", true);
-            //  Каждая пара ключ-значение отделяется символом &, ключ отделен от значения символом =  
-            // В ключах и значениях пробелы заменяются на знак +, и затем, используя URL-кодирование, 
-            // заменяются все не буквенно-цифровые символы
-            xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            // Событие readystatechange возникает каждый раз, когда измен¤етс¤ значение свойства readyState. 
+            xmlHttp.open("GET", "http://localhost:8080/AJAX/GET-request.php?" + params, true);
+            // Событие readystatechange возникает каждый раз, когда изменяется значение свойства readyState. 
             xmlHttp.onreadystatechange = handleRequestStateChange;
-            xmlHttp.send(params);
+            xmlHttp.send();
         }
         catch (e) {
-            alert("Нет подключения к серверу:\n" + e.toString());
+            console.log("Нет подключения к серверу:\n" + e.toString());
         }
     }
 }
 
 
 function handleRequestStateChange() {
-    if (xmlHttp.readyState === 4) {
-        if (xmlHttp.status === 200) {
+    if (xmlHttp.readyState == 4) {
+        if (xmlHttp.status == 200) {
             try {
                 // responseXML: возвращает ответ от сервера в формате xml
                 let xmlResponse = xmlHttp.responseXML;
                 if (!xmlResponse || !xmlResponse.documentElement)
-                    throw "Invalid XML structure:\n" + xmlHttp.responseText;
+                    throw ("Неверная XML-структура:\n" + xmlHttp.responseText);
 
                 let xmlRoot = xmlResponse.documentElement;
                 let data = xmlRoot.firstChild.data;

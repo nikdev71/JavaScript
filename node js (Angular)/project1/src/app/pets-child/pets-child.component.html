@@ -1,0 +1,11 @@
+<div class="animal">
+    <img class="pet-photo" [src]="pet.photo" alt="">
+    <div>
+        <h2 class="pet-name">{{pet.name}}<span class="species"> ({{pet.species}})</span></h2>
+        <p><strong>Age: {{calculateAge()}}</strong></p>
+        <h4 *ngIf="pet.favFoods">Favorite Foods</h4>
+        <ul class="foods-list" *ngIf="pet.favFoods">
+            <li *ngFor="let f of pet.favFoods">{{f}}</li>
+        </ul>
+    </div>
+</div>

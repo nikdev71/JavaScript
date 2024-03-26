@@ -1,0 +1,7 @@
+<h1>Продукция магазина</h1>
+<p>описание условий акции</p>
+<p>Количество товара в корзине : {{clicks}}</p>
+<p>Общая сумма : {{total}}$</p>
+<div *ngFor="let product of products; let ind = index" >
+  <app-child [product]="product" (onChanged)="onChanged($event, ind)"></app-child>
+</div>
