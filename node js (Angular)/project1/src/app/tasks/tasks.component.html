@@ -1,0 +1,9 @@
+<input type="text" [(ngModel)]="name">
+<input type="text" [(ngModel)]="salary">
+<input type="date" [(ngModel)]="date">
+<button (click)="addName()">Добавить</button>
+    <div *ngFor="let item of names; let i = index">
+        <p>{{ item | slice:0:1|uppercase }}{{item|slice:1}} - {{ salaries[i] | currency }} {{dates[i] | date}}</p>
+        <button (click)="remove(i)">Remove</button>
+      </div>
+

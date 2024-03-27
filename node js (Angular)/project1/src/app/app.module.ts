@@ -13,6 +13,8 @@ import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
 import { PetsComponent } from './pets/pets.component';
 import { PetsChildComponent } from './pets-child/pets-child.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,11 +28,13 @@ import { PetsChildComponent } from './pets-child/pets-child.component';
     ParentComponent,
     ChildComponent,
     PetsComponent,
-    PetsChildComponent
+    PetsChildComponent,
+    TasksComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration()
