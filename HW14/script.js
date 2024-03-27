@@ -37,7 +37,7 @@ $(document).ready(function(){
       currentPageMovies.forEach(movie => {
           movieCards += `
             <div class="card">
-              <img src="${movie.Poster}" alt="${movie.Title} Poster">
+              <div class='imgcontainer'><img src="${movie.Poster}" alt="${movie.Title} Poster"></div>
               <div class="info">
                   <h2>${movie.Title}</h2>
                   <p><strong>Type:</strong> ${movie.Type}</p>
