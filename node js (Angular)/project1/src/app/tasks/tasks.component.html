@@ -1,9 +1,16 @@
-<input type="text" [(ngModel)]="name">
-<input type="text" [(ngModel)]="salary">
+<label for="">Имя</label>
+<input type="text" [(ngModel)]="name" placeholder="Имя">
+<label for="">Зарплата</label>
+<input type="text" [(ngModel)]="salary" placeholder="Зарплата">
+<label for="">Дата рождения</label>
 <input type="date" [(ngModel)]="date">
-<button (click)="addName()">Добавить</button>
-    <div *ngFor="let item of names; let i = index">
-        <p>{{ item | slice:0:1|uppercase }}{{item|slice:1}} - {{ salaries[i] | currency }} {{dates[i] | date}}</p>
-        <button (click)="remove(i)">Remove</button>
-      </div>
+<button (click)="addName()" class='btn btn-success'>Додати</button>
+
+<div *ngFor="let item of names; let i = index" class="item-container">
+    <p class="item-name">{{ item | slice:0:1|uppercase }}{{item|slice:1}}</p>
+    <p class="item-salary">{{ salaries[i] | currency }}</p>
+    <p class="item-date">{{dates[i] | date}}</p>
+    <button (click)="remove(i)" class="remove-button">Удалить</button>
+    <button (click)="edit(i)" class="btn btn-warning">Редактировать</button>
+</div>
 

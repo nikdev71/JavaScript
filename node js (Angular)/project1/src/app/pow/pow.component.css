@@ -1,0 +1,105 @@
+
+.container-audition {
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid grey;
+  padding: 2em;
+  border-radius: 16px;
+}
+
+.filter {
+  margin-bottom: 20px;
+}
+
+.sorting {
+  margin-bottom: 20px;
+}
+
+button{
+  background: none;
+  border: 1px solid grey;
+  border-radius: 8px;
+  padding: 4px 8px;
+  margin-bottom: 5px;
+  transition: 0.3s ease;
+  margin-right: 10px;
+}
+button:hover{
+  background: grey;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table th {
+  background-color: #f2f2f2;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+.filter-form {
+  margin-bottom: 20px;
+}
+
+.group-form {
+  margin-bottom: 20px;
+}
+
+.group-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.group-form input,
+.group-form select {
+  width: 30%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background: none;
+  border: 1px solid grey;
+}
+
+.sorting-buttons button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.auditorium-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.auditorium-table th,
+.auditorium-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.auditorium-table th {
+  background-color: #f2f2f2;
+}
+
+.auditorium-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.auditorium-table tr:hover {
+  background-color: #ddd;
+}
+

@@ -22,4 +22,9 @@ export class TasksComponent {
     this.salaries.splice(index, 1);
     this.dates.splice(index,1);
   }
+  edit(index: number) {
+    this.names[index]=this.name;
+    this.salaries[index]= this.salary;
+    this.dates[index] = this.date;
+  }
 }

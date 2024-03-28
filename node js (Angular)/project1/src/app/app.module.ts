@@ -15,6 +15,8 @@ import { PetsComponent } from './pets/pets.component';
 import { PetsChildComponent } from './pets-child/pets-child.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { FormsModule } from '@angular/forms';
+import { PowComponent } from './pow/pow.component';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { FormsModule } from '@angular/forms';
     ChildComponent,
     PetsComponent,
     PetsChildComponent,
-    TasksComponent
+    TasksComponent,
+    PowComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
