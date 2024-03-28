@@ -33,7 +33,7 @@ form select{
 .card {
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 270px;
+    width: 28%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 5px 5px;
@@ -43,18 +43,19 @@ form select{
   
   .card h2 {
     margin-top: 0;
-    font-size: 24px;
+    font-size: 21px;
   }
   
   .card p {
     margin-bottom: 10px;
-    font-size: 16px;
+    font-size: 13px;
   }
-  .imgcontainer {
+  .card .imgcontainer {
     width: 200%;
   }
-   .card img {
+   .card .imgcontainer  img {
     max-width: 100%;
+    max-height: 100%;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
