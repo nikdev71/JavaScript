@@ -1,0 +1,7 @@
+<div class="item">
+    <!-- <app-product-add></app-product-add> -->
+    <div class="list-group">
+        <h2 *ngFor="let product of products">{{product.name}}</h2>
+      <app-product *ngFor="let product of products" [product]="product"></app-product>
+    </div>
+  </div>

@@ -17,6 +17,14 @@ import { TasksComponent } from './tasks/tasks.component';
 import { FormsModule } from '@angular/forms';
 import { PowComponent } from './pow/pow.component';
 import { FilterPipe } from './filter.pipe';
+import { ProductsComponent } from './products/products.component';
+import { ProductAddComponent } from './product-add/product-add.component';
+import { ProductComponent } from './product/product.component';
+import { ProductService } from './product.service';
+import { Form1Component } from './form1/form1.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { ShopComponent } from './shop/shop.component';
+import { GoodService } from './good.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +41,13 @@ import { FilterPipe } from './filter.pipe';
     PetsChildComponent,
     TasksComponent,
     PowComponent,
-    FilterPipe
+    FilterPipe,
+    ProductsComponent,
+    ProductAddComponent,
+    ProductComponent,
+    Form1Component,
+    AdminPanelComponent,
+    ShopComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +55,9 @@ import { FilterPipe } from './filter.pipe';
     FormsModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    ProductService,
+    GoodService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,31 @@
+<main>
+    <form action="" #form="ngForm">
+        <div class="col" style="width: 20%;">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" [(ngModel)]="curGood.name" required="">
+        </div>
+        <div class="col" style="width: 60%;">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" [(ngModel)]="curGood.description" style="width: 100%;" required="">
+        </div>
+        <div class="col" style="width: 10%;">
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price" [(ngModel)]="curGood.price" required min="0">
+        </div>
+        <div class="col" style="width: 10%;">
+            <label for="discount">Discount:</label>
+            <input type="text" id="discount" name="discount" [(ngModel)]="curGood.discount" required min="0" max="100">
+        </div>
+        <button (click)="addGood(form)" class="addbtn">{{btntext}}</button>
+    </form>
+</main>
+<section>
+    <div  class='row-good' *ngFor="let g of goodService.goods; let i = index">
+        <p>{{g.name}}</p>
+        <p>{{g.description}}</p>
+        <p>{{g.price}}$</p>
+        <p>{{g.discount}}%</p>
+        <button (click)="editGood(i)">Edit</button>
+        <button (click)="removeGood(i)">Delete</button>
+    </div>
+</section>

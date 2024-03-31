@@ -1,0 +1,15 @@
+header{
+    display: flex;
+    margin: 0 10%;
+}
+h2{
+    margin-right: 20px;
+}
+a{
+    text-decoration: none;
+    color: black;
+    transition: 0.3s ease;
+}
+a:hover{
+    color: rgba(0, 0, 0, 0.301);
+}

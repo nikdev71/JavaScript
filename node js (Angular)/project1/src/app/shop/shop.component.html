@@ -1,0 +1,7 @@
+<section>
+    <div class="good-item" *ngFor="let g of goodService.goods">
+        <p>{{g.name}}</p>
+        <p>{{g.description}}</p>
+        <p >{{g.price}}<span style="margin-left: 20px;">{{g.discount}}%</span></p>
+    </div>
+</section>

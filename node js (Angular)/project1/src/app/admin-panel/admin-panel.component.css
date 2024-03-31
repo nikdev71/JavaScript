@@ -1,0 +1,51 @@
+
+main{
+    margin: 1% 10%;
+    display: flex;
+    align-items: center;
+}
+form{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.col{
+    margin: 2% 0;
+}
+.col label{
+    font-size: 18px;
+}
+.col input,label{
+    display: block;
+    width: 100%;
+}
+.addbtn{
+    color: whitesmoke;
+    background-color: black;
+    width: 75px;
+    height: 35px;
+    margin-top: 25px;
+    transition: 0.3s ease;
+}
+section{
+    margin: 1% 10%;
+}
+.row-good {
+    display: grid;
+    grid-template-rows: 1fr; 
+    grid-template-columns: 1fr 2fr 0.5fr 0.5fr 0.3fr 0.3fr ; 
+    gap: 10px; 
+    padding: 10px; 
+    border-bottom: 1px solid grey;
+}
+
+.row-good p {
+    margin: 0;
+}
+
+.row-good button {
+    width: 100%; 
+}
+.addbtn:hover{
+    background-color: #36454f;
+}
