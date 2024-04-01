@@ -4,7 +4,7 @@
     </div>
 </header> -->
 <header>
-    <h2><a routerLink="/admin-panel">Admin-Panel</a></h2>
-    <h2><a routerLink="/shop">Shop</a></h2>
+    <h2 ><a routerLink="/admin-panel" [ngClass]="{'cur':isCur}" (click)="isCur = !isCur">Admin-Panel</a></h2>
+    <h2 ><a routerLink="/shop" [ngClass]="{'cur':!isCur}" (click)="isCur = !isCur">Shop</a></h2>
 </header>
 
