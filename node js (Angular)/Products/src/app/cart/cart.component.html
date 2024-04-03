@@ -5,8 +5,9 @@
   </p>
 
 @for(item of items; track $index){
+  <div class="shipping-item">
     <span>{{ item.name }}</span>
-    <span>{{ item.price | currency }}</span>
+    <span>{{ item.price | currency }}</span></div> 
 }
 
 <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">

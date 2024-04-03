@@ -16,6 +16,9 @@ export class Form1Component {
     text: 'Нет'
   }];
   submitForm(form: NgForm){
-
+    console.log(form)
+  }
+  onSubmit(){
+    
   }
 }

@@ -14,7 +14,7 @@ import { ChildComponent } from './child/child.component';
 import { PetsComponent } from './pets/pets.component';
 import { PetsChildComponent } from './pets-child/pets-child.component';
 import { TasksComponent } from './tasks/tasks.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PowComponent } from './pow/pow.component';
 import { FilterPipe } from './filter.pipe';
 import { ProductsComponent } from './products/products.component';
@@ -25,6 +25,8 @@ import { Form1Component } from './form1/form1.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ShopComponent } from './shop/shop.component';
 import { GoodService } from './good.service';
+import { PasswordMatchDirective } from './passsword-match.directive';
+import { FormHWComponent } from './form-hw/form-hw.component';
 
 @NgModule({
   declarations: [
@@ -48,11 +50,14 @@ import { GoodService } from './good.service';
     Form1Component,
     AdminPanelComponent,
     ShopComponent,
+    PasswordMatchDirective,
+    FormHWComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),

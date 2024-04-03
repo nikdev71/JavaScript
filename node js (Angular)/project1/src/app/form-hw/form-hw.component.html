@@ -1,0 +1,25 @@
+<form (ngSubmit)="onSubmit()" #form="ngForm" name="signInForm" class="sign-in-form">
+    <div class="form-group">
+      <label for="email" class="form-label">Email:</label>
+      <input type="email" ngModel #email="ngModel" id="email" name="email" required email class="form-control">
+      <div *ngIf="email.invalid && email.touched" style="color: red; font-size: 14px;">Email is invalid</div>
+    </div>
+    <div class="form-group">
+      <label for="password" class="form-label">Password:</label>
+      <input type="password" ngModel #password="ngModel" id="password" name="password"  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}" class="form-control">
+      <div *ngIf="password.invalid && password.touched" style="color: red; font-size: 14px;">Password is invalid</div>
+    </div>
+    <div class="form-group">
+        <a href="#" class="forgot-password-link">Forgot password?</a>
+    </div>
+    <div class="buttons-group">
+    <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Sign In</button>
+    <a routerLink="/form1"><button type="button" class="btn btn-primary">Sign Up</button></a>
+    </div>
+    <div class="social-login">
+        <p>Sign in with:</p>
+        <button class="btn btn-social"> Facebook</button>
+        <button class="btn btn-social">Google</button>
+        <button class="btn btn-social">Twitter</button>
+    </div>
+  </form>

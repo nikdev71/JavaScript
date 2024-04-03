@@ -1,4 +1,4 @@
-<!-- <div class="form-container">
+<div class="form-container">
     <form action="" (ngSubmit)="submitForm(form)" #form="ngForm">
         <div class="form-group" [ngClass]="{'has-error':email.invalid}">    
             <label for="email">Email:</label>
@@ -26,15 +26,15 @@
                 required>
                 <p *ngIf="pass.invalid && pass.touched" >Введен неккорректный email</p>
         </div>
-        <div class="form-group" >
+        <div class="form-group" [ngClass]="{'has-error':pass2.invalid}">
             <label for="pass2">Confirm password:</label>
             <input 
                 type="password" 
                 id="pass2" 
                 class="form-control"   
                 ngModel
+                #pass2 ="ngModel"
                 name="pass2"
-                appPasswordMatch="pass"
                 required>
         </div>
         <div class="form-group">
@@ -49,31 +49,6 @@
             <input type="radio" [value]="ans.type"  name="answ">
             <label for="answ">{{ans.text}}</label>
         </div>
-        <button [disabled]="!form.valid " type="submit" class="btn btn-primary" >Submit</button>    
+        <button [disabled]="!form.valid || pass.value !=pass2.value" type="submit" class="btn btn-primary" >Submit</button>    
     </form>
-</div> -->
-
-<form (ngSubmit)="onSubmit()" #form="ngForm" name="signInForm" class="sign-in-form">
-    <div class="form-group">
-      <label for="email" class="form-label">Email:</label>
-      <input type="email" ngModel #email="ngModel" id="email" name="email" required email class="form-control" required="">
-      <div *ngIf="email.invalid && email.touched" style="color: red; font-size: 14px;">Email is invalid</div>
-    </div>
-    <div class="form-group">
-      <label for="password" class="form-label">Password:</label>
-      <input type="password" ngModel #password="ngModel" id="password" name="password"  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}" class="form-control" required>
-      <div *ngIf="password.invalid && password.touched" style="color: red; font-size: 14px;">Password is invalid</div>
-    </div>
-    <div class="form-group">
-        <label for="password" class="form-label">Confirm password:</label>
-        <input type="password" ngModel #password2="ngModel" id="password2" name="password2"  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}" class="form-control" required>
-        <div *ngIf="password2.value != password.value" style="color: red; font-size: 14px;">Password is mismatch</div>
-    </div>
-    <a routerLink="/form-hw"><button type="submit" [disabled]="form.invalid" class="btn btn-primary">Sign Up</button></a>
-    <div class="social-login">
-        <p>Sign in with:</p>
-        <button class="btn btn-social"> Facebook</button>
-        <button class="btn btn-social">Google</button>
-        <button class="btn btn-social">Twitter</button>
-    </div>
-  </form>
+</div>
