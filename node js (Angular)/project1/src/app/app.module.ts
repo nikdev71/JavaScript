@@ -27,6 +27,7 @@ import { ShopComponent } from './shop/shop.component';
 import { GoodService } from './good.service';
 import { PasswordMatchDirective } from './passsword-match.directive';
 import { FormHWComponent } from './form-hw/form-hw.component';
+import { RformComponent } from './rform/rform.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { FormHWComponent } from './form-hw/form-hw.component';
     ShopComponent,
     PasswordMatchDirective,
     FormHWComponent,
+    RformComponent,
   ],
   imports: [
     BrowserModule,

@@ -15,10 +15,16 @@ export class Form1Component {
     type: 'no',
     text: 'Нет'
   }];
+  defaultAnswer ='yes';
+  defaultLanguage ='en';
+  formData={};
+  isSubmited = false;
   submitForm(form: NgForm){
-    console.log(form)
+    this.isSubmited = true;
+    this.formData = form.value;
   }
   onSubmit(){
     
   }
+  
 }

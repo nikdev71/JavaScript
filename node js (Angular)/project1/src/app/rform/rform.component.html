@@ -1,0 +1,85 @@
+<!-- <div class="containerf">
+    <form [formGroup]="form" (click)="submitForm()" >
+        <fieldset formGroupName="user">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="text" class="form-control" formControlName="email">
+              <p *ngIf="form.get('user.email')?.invalid && form.get('user.email')?.touched">email не верный</p>
+            </div>
+            <div class="form-group">
+              <label>Пароль</label>
+              <input type="password" class="form-control" formControlName="pass" pattern="[a-zA-Z0-9]{6,10}">
+              <p *ngIf="form.get('user.pass')?.invalid && form.get('user.pass')?.touched">Пароль не верный</p>
+            </div>
+        </fieldset>
+      <div class="form-group">
+        <label>Выберите язык</label>
+        <select class="form-control" formControlName="lang">
+          <option value="en">Английский</option>
+          <option value="fr">Французский</option>
+          <option value="de">Немецкий</option>
+        </select>
+      </div>
+      <div class="radio" *ngFor="let ans of answers">
+        <label>
+          <input type="radio" [value]="ans.type" formControlName="answ"> {{ans.text}}
+        </label>
+      </div>
+      <button class="btn btn-success" type="submit">Сохранить</button>
+      <pre>
+        {{formData | json}}
+      </pre>
+    </form>
+  </div> -->
+
+  <div class="containerf">
+    <form [formGroup]="form" (click)="submitForm()" >
+        <fieldset formGroupName="user">
+            <div class="form-group" [ngClass]="{'has-error':form.get('user.firstname')?.invalid && form.get('user.firstname')?.touched}">
+              <label>Firstname</label>
+              <input type="text" class="form-control" formControlName="firstname" pattern="\w{4,20}">
+              <p *ngIf="form.get('user.firstname')?.invalid && form.get('user.firstname')?.touched" >Firstname invalid</p>
+            </div>
+            <div class="form-group" [ngClass]="{'has-error':form.get('user.lastname')?.invalid && form.get('user.lastname')?.touched}">
+              <label>Lastname</label>
+              <input type="text" class="form-control" formControlName="lastname" pattern="\w{4,20}">
+              <p *ngIf="form.get('user.lastname')?.invalid && form.get('user.lastname')?.touched" >Lastname invalid</p>
+            </div>
+        </fieldset>
+        <fieldset formGroupName="address" [disabled]="form.get('user')?.invalid">
+          <div class="form-group" [ngClass]="{'has-error':form.get('address.country')?.invalid && form.get('address.country')?.touched}">
+            <label>Country</label>
+            <input type="text" class="form-control" formControlName="country" >
+            <p *ngIf="form.get('address.country')?.invalid && form.get('address.country')?.touched">Country invalid</p>
+          </div>
+          <div class="form-group" [ngClass]="{'has-error':form.get('address.city')?.invalid && form.get('adress.department')?.touched}">
+            <label>City</label>
+            <input type="text" class="form-control" formControlName="city" >
+            <p *ngIf="form.get('address.city')?.invalid && form.get('address.city')?.touched && form.get('adress.department')?.touched">City invalid</p>
+          </div>
+          <div class="form-group" [ngClass]="{'has-error':form.get('address.department')?.invalid && form.get('address.department')?.touched}">
+            <label>Department</label>
+            <input type="text" class="form-control" formControlName="department" pattern="[0-9]*">
+            <p *ngIf="form.get('address.department')?.invalid && form.get('address.department')?.touched">Department invalid</p>
+          </div>
+      </fieldset>
+      <fieldset formGroupName="contact" [disabled]="form.get('address')?.invalid">
+        <div class="form-group" [ngClass]="{'has-error':form.get('contact.email')?.invalid && form.get('contact.email')?.touched}">
+          <label>Email</label>
+          <input type="text" class="form-control" formControlName="email" >
+          <p *ngIf="form.get('contact.email')?.invalid && form.get('contact.email')?.touched">Email не верный</p>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error':form.get('contact.phone')?.invalid && form.get('contact.phone')?.touched}">
+          <label>Phone</label>
+          <input type="text" class="form-control" formControlName="phone" pattern="[0-9]{11,13}">
+          <p *ngIf="form.get('contact.phone')?.invalid && form.get('contact.phone')?.touched">Phone invalid</p>
+        </div>
+    </fieldset>
+      <div class="radio" *ngFor="let pay of payment">
+        <label>
+          <input type="radio" [value]="pay.type" formControlName="paym"> {{pay.text}}
+        </label>
+      </div>
+      <button  type="submit" [disabled]="form.invalid">Сохранить</button>
+    </form>
+  </div>

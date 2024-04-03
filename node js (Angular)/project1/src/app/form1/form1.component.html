@@ -1,4 +1,4 @@
-<!-- <div class="form-container">
+<div class="form-container">
     <form action="" (ngSubmit)="submitForm(form)" #form="ngForm">
         <div class="form-group" [ngClass]="{'has-error':email.invalid}">    
             <label for="email">Email:</label>
@@ -49,11 +49,28 @@
             <input type="radio" [value]="ans.type"  name="answ">
             <label for="answ">{{ans.text}}</label>
         </div>
+        <div *ngFor="let ans of answers">
+            <label for="answ">
+            <input 
+             type="radio"
+             [value]="ans.type"  
+             [ngModel]="defaultAnswer"
+             name="answ">
+                {{ans.text}}
+            </label>
+        </div>
         <button [disabled]="!form.valid " type="submit" class="btn btn-primary" >Submit</button>    
     </form>
-</div> -->
+    <hr>
 
-<form (ngSubmit)="onSubmit()" #form="ngForm" name="signInForm" class="sign-in-form">
+    <div *ngIf="isSubmited">
+        <pre>
+            {{formData | json}}
+        </pre>
+    </div>
+</div>
+
+<!-- <form (ngSubmit)="onSubmit()" #form="ngForm" name="signInForm" class="sign-in-form">
     <div class="form-group">
       <label for="email" class="form-label">Email:</label>
       <input type="email" ngModel #email="ngModel" id="email" name="email" required email class="form-control" required="">
@@ -76,4 +93,4 @@
         <button class="btn btn-social">Google</button>
         <button class="btn btn-social">Twitter</button>
     </div>
-  </form>
+  </form> -->
