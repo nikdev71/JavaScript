@@ -1,0 +1,20 @@
+<h1>Cocktails</h1>
+<section >
+    @for(cock of cocktails | async; track $index){
+        <p>{{cock.title}}</p>
+        <p>{{cock.volume}}</p>
+        <p>{{cock.price}}</p>
+    }
+</section>
+
+<h1>Albums</h1>
+<section >
+    @for(alb of albums | async; track $index){
+        <p>{{alb.id}}</p>
+        <p>{{alb.name}}</p>
+        <p>{{alb.username}}</p>
+        <p>{{alb.email}}</p>
+        <p>{{alb.phone}}</p>
+        <p>{{alb.website}}</p>
+    }
+</section>

@@ -28,6 +28,8 @@ import { GoodService } from './good.service';
 import { PasswordMatchDirective } from './passsword-match.directive';
 import { FormHWComponent } from './form-hw/form-hw.component';
 import { RformComponent } from './rform/rform.component';
+import { CocktailsComponent } from './cocktails/cocktails.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -54,12 +56,14 @@ import { RformComponent } from './rform/rform.component';
     PasswordMatchDirective,
     FormHWComponent,
     RformComponent,
+    CocktailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(),
