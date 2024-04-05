@@ -30,6 +30,9 @@ import { FormHWComponent } from './form-hw/form-hw.component';
 import { RformComponent } from './rform/rform.component';
 import { CocktailsComponent } from './cocktails/cocktails.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FilmsComponent } from './films/films.component';
+import { LocationService } from './location.service';
+import { HttpComponent } from './http/http.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormHWComponent,
     RformComponent,
     CocktailsComponent,
+    FilmsComponent,
+    HttpComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +73,8 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     provideClientHydration(),
     ProductService,
-    GoodService
+    GoodService,
+    LocationService
   ],
   bootstrap: [AppComponent]
 })

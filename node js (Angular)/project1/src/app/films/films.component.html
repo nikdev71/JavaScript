@@ -1,0 +1,43 @@
+<section>
+<h3>Search</h3>
+    <form action="" id="form" [formGroup]="form">
+        <div class="row">
+            <label for="">Title:</label>
+            <input type="text" name="t" formControlName="t">
+        </div>
+        <div class="row">
+        <label for="">Type:</label>
+            <select name="type" formControlName="type">
+                <option value="movie" selected>Movie</option>
+                <option value="series">Series</option>
+                <option value="episode">Episode</option>
+            </select>
+        </div>
+        <input type="submit" value="Search" id="searchmovie" (click)="findMovie()">
+    </form>
+        <div class="films" >
+            <div *ngFor="let mov of movies" class="mycard" (click)="showMovieDetails(mov.imdbID)">
+                <div class='imgcontainer'><img [src]="mov.Poster"></div>
+                <div class="info">
+                    <h2>{{mov.Title}}</h2>
+                    <p><strong>Type:</strong> {{mov.Type}}</p>
+                    <p><strong>Year:</strong> {{mov.Year}}</p>
+                </div>
+                </div>
+            </div>
+        
+        <div id="movieInfo" *ngIf="curmovie">
+            <img [src]='curmovie.Poster'>
+            <div>
+                <h2>{{curmovie.Title}}</h2>
+                <p>{{curmovie.Plot}}</p>
+                <p><strong>Year:</strong> {{curmovie.Year}}</p>
+                <p><strong>Rated:</strong> {{curmovie.Rated}}</p>
+                <p><strong>Released:</strong> {{curmovie.Released}}</p>
+                <p><strong>Runtime:</strong> {{curmovie.Runtime}}</p>
+                <p><strong>Genre:</strong> {{curmovie.Genre}}</p>
+                <p><strong>Director:</strong> {{curmovie.Director}}</p>
+                <p><strong>IMDb Rating:</strong> {{curmovie.imdbRating}}</p>
+            </div>`
+        </div>
+</section>  

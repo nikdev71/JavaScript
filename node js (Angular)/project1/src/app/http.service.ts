@@ -13,4 +13,8 @@ export class HttpService {
   getAlbums(){
     return this.http.get<any>('https://jsonplaceholder.typicode.com/users')
   }
+  getfilms(){
+    return this.http.get<any>('https://jsonplaceholder.typicode.com/users')
+  }
+  
 }

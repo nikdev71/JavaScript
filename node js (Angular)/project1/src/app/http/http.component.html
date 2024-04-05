@@ -1,0 +1,15 @@
+<h1>Locations</h1>
+<input type="text" [(ngModel)]="name">
+<button (click)="load()">Load</button>
+<hr>
+<div *ngFor="let item of locations"> 
+    <p>{{item.name}}</p>
+    <span  
+    class="wifi" 
+    [ngClass]="{'no-wifi':!item.wifi}"
+    (click)="changeWifi(item)">
+    <i *ngIf="!item.wifi" >no </i>
+    wifi
+  </span>
+  <button (click)="delLocation(item)">Delete</button>
+</div>
