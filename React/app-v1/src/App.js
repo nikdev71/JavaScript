@@ -1,30 +1,25 @@
 import React, { PureComponent } from 'react'
-import FIO from './FIO/FIO'
-import Contact from './Contacts/Contact'
-import Email from './Email/email'
 import City from './City/city'
 import Book from './Book/book'
 import './App.css'
+import Header from './Header/Header'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Person from './Person/Person'
+
 
 class App extends PureComponent {
   render() {
     return (
       <>
-      <div class="personal-info">
-        <FIO/>
-        <Contact/>
-        <Email/>
-      </div>
-      
-      <div class="location">
-        <City/>
-      </div>
-    
-      <div class="book-info">
-        <Book/>
-      </div>
+      <Router>
+          <Header/>
+          <Routes>
+                <Route path='/Person' element={<Person/>}/>
+                <Route path='/Book' element={<Book/>}/>
+                <Route path='/City' element={<City/>}/>
+          </Routes>
+      </Router>
     </>
-    
     )
   }
 }

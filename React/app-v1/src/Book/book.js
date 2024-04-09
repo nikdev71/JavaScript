@@ -9,9 +9,11 @@ class Book extends PureComponent {
     render() {
         return (
             <>
+            <div class="book-info">
             <Title/>
             <Author/>
             <Pages/>
+            </div>
             </>
         )
     }
