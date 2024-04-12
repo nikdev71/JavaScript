@@ -7,6 +7,11 @@ import Price from './less2/About/Price';
 import UserList from './less2/About/User/UserList';
 import BookList from './Book/BookList';
 import Display from './Display/Display';
+import Counter from './less5/counter';
+import Counter2 from './less5/Counter2';
+import BoldButton from './less5/BoldFunc';
+import BoldClass from './less5/BoldClass';
+import Theme from './less5/Theme';
 
 function App() {
   return (
@@ -16,7 +21,7 @@ function App() {
       </div> */}
         {/* <UserList/> */}
         {/* <BookList/> */}
-          <Display/>
+          {/* <Display/> */}
     {/* <main>
           <Routes>
             <Route path='/Price' element={<Price/>}/>
@@ -24,7 +29,10 @@ function App() {
             <Route path='/Contact' element={<Contact/>}/>
           </Routes>
       </main> */}
-      </Router>
+      {/* <Counter/> */}
+      <Theme/>
+      {/* <BoldButton/> */}
+        </Router>
   );
 }
 

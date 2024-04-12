@@ -8,7 +8,7 @@ class Display extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            isLog: true
+            isLog: true,
         };
     }
     
@@ -20,11 +20,23 @@ class Display extends PureComponent {
 
     render() {
         const { isLog } = this.state;
+        let content;
+        if (isLog) {
+            content = <BookList />;
+        } else {
+            content = <BookList2 />;
+        }
         return (
             <div>
                 <div>
+                    {content}
+                </div>
+                <div>
                     {isLog ? <BookList /> : <BookList2/>}
                 </div>
+                <div>
+                    {isLog && <BookList />}
+                 </div>
                 <button onClick={this.handle}>Поменять</button>
             </div>
         );
