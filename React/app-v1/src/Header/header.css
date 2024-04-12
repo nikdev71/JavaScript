@@ -1,0 +1,27 @@
+nav {
+    background-color: #f0f0f0; /* колір фону */
+    padding: 10px; /* відступи всередині */
+    border-radius: 5px; /* закруглені кути */
+}
+
+.menu {
+    list-style-type: none; /* видалення маркерів списку */
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    display: inline; /* розташування пунктів меню в ряд */
+    margin-right: 20px; /* відступи між пунктами меню */
+}
+
+.menu li a {
+    text-decoration: none; /* видалення підкреслення тексту посилань */
+    color: #333; /* колір тексту */
+    font-weight: bold; /* жирний шрифт */
+    font-size: 16px; /* розмір шрифту */
+}
+
+.menu li a:hover {
+    color: #555; /* колір тексту при наведенні */
+}

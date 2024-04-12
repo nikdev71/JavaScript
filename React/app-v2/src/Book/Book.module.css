@@ -1,0 +1,14 @@
+.item{
+    padding: 2em;
+    border: 1px solid grey;
+    background-color: lightgrey;
+    width: 300px;
+}
+.bookcontainer{
+    display: flex;
+    justify-content: space-between;
+    margin: 5% auto;
+}
+img{
+    max-width: 150px;
+}
