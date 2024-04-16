@@ -25,7 +25,10 @@ class Theme extends PureComponent {
         
         return (
             <div className={themeClass}>
-                <button onClick={()=>this.switchTheme()}>SwitchTheme</button>
+                <div class="toggle">
+                <input type="checkbox" id="toggle-btn" onClick={()=>this.switchTheme()}/>
+                <label for="toggle-btn"></label>
+                </div>
                 <Counter2/>
                 <BoldClass/>
             </div>
