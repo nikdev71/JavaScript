@@ -10,7 +10,8 @@ class ImageFilter extends Component {
       grayscaleValue: 0,
       sepiaValue: 0,
       invertValue: 0,
-      blurValue: 0 
+      blurValue: 0,
+      filteredImage: null
     };
   }
 
@@ -35,10 +36,11 @@ class ImageFilter extends Component {
       const canvasWidth = image.width + 2 * blurValue; 
       const canvasHeight = image.height + 2 * blurValue; 
       canvas.width = canvasWidth;
-      canvas.height =canvasHeight;
+      canvas.height = canvasHeight;
       ctx.filter = `grayscale(${grayscaleValue}%) sepia(${sepiaValue}%) blur(${blurValue}px) invert(${invertValue}%)`;
       ctx.drawImage(image, blurValue, blurValue, image.width, image.height); 
-      this.setState({ previewImage: canvas.toDataURL('image/png') });
+      const filteredImage = canvas.toDataURL('image/png');
+      this.setState({ filteredImage });
     };
     image.src = originalImage;
   };
@@ -51,7 +53,7 @@ class ImageFilter extends Component {
   };
 
   render() {
-    const { previewImage, grayscaleValue, sepiaValue, invertValue, blurValue } = this.state;
+    const { previewImage, grayscaleValue, sepiaValue, invertValue, blurValue, filteredImage } = this.state;
 
     return (
       <div>
@@ -110,6 +112,7 @@ class ImageFilter extends Component {
             </div>
           </div>
         )}
+        {filteredImage && <img src={filteredImage} alt="Результат фильтрации" />}
       </div>
     );
   }
