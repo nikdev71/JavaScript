@@ -6,6 +6,9 @@ import ProductList from './RoutingLesson/ProductList';
 import Product from './RoutingLesson/Product';
 import { ProductProvider } from './context/ProductContext';
 import Home from './RoutingLesson/Home';
+import Authorisation from './RoutingLesson/Authorisation';
+import Login from './RoutingLesson/Login';
+import Registration from './RoutingLesson/Registration';
 
 function App() {
   const router = createBrowserRouter([
@@ -35,6 +38,20 @@ function App() {
         }
       ]
     },
+    {
+        path:'/auth',
+        element : <Authorisation/>,
+        children:[
+          {
+            path:'login',
+            element : <Login/>,
+          },
+          {
+            path:'reg',
+            element : <Registration/>,
+          }
+        ]
+    }
   ])
   return (
     <>

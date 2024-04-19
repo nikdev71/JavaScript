@@ -10,6 +10,7 @@ function Layout() {
                     <ul className='menu'>
                     <li><Link to="/">Hello</Link></li>
                     <li><Link to="/Mafia">Cards</Link></li>
+                    <li><Link to="/Admin">Admin</Link></li>
                     </ul>
                 </nav>
             </div>

@@ -1,9 +1,9 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
-  const products = [
+  const [products, setProducts] = useState([
     {
       title: 'Сумка',
       price: 600,
@@ -19,10 +19,18 @@ export const ProductProvider = ({ children }) => {
       price: 1800,
       id: 2
     }
-  ];
+  ]);
+
+  const addProduct = (newProduct) => {
+    setProducts([...products, newProduct]);
+  };
+
+  const deleteProduct = (productid)=>{
+    setProducts([...products.filter(item=> item.id !== productid)])
+  }
 
   return (
-    <ProductContext.Provider value={products}>
+    <ProductContext.Provider value={{ products, addProduct, deleteProduct }}>
       {children}
     </ProductContext.Provider>
   );
