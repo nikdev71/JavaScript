@@ -6,6 +6,7 @@ import NotFound from './Mafia/NotFound';
 import { MafiaContextProvider } from './Mafia/MafiaContext';
 import Layout from './Mafia/Layout';
 import Rules from './Mafia/Rules';
+import Admin from './Mafia/Admin';
 
 function App() {
   const router = createBrowserRouter([
@@ -26,6 +27,10 @@ function App() {
         {
           path: '/Mafia/card/:id',
           element: <CardDetails />
+        },
+        {
+          path: '/Admin',
+          element: <Admin />
         },
         {
           path: '*',

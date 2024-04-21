@@ -7,6 +7,10 @@ function Admin() {
     const {addCard} = useContext(MafiaContext)
     const [imageUrl, setImageUrl] = useState();
 
+    const handleChange = (e)=>{
+        setImageUrl( e.target.value)
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         addCard({ img: imageUrl });
@@ -14,13 +18,13 @@ function Admin() {
       };
 
     return (
-        <form action="">
+        <form action="" onSubmit={handleSubmit}>
             <input type="text" 
                    placeholder='Enter the image url'
                    value={imageUrl}
-                   onChange={handleSubmit}
+                   onChange={handleChange}
                    />
-            <button type='submit'></button>
+            <button type='submit'>Добавить</button>
         </form>
     )
 }
