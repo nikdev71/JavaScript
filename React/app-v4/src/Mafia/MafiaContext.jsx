@@ -18,8 +18,17 @@ export const MafiaContextProvider = ({ children }) => {
     setCards([...cards,{ id: Date.now(), ...newCard }])
   }
 
+  const deleteCard = (cardId) => {
+    setCards(cards.filter(card => card.id !== cardId));
+  };
+
+  const editCard = (cardId, newImage) => {
+    setCards(cards.map(card => card.id === cardId ? { ...card, img: newImage } : card));
+  };
+
+
   return (
-    <MafiaContext.Provider value={{ cards, addCard }}>
+    <MafiaContext.Provider value={{ cards, addCard, deleteCard, editCard }}>
       {children}
     </MafiaContext.Provider>
   );
