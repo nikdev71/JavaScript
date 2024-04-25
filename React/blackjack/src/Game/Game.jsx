@@ -1,15 +1,18 @@
 import React, { PureComponent } from 'react';
 import Card from '../Card/Card';
+import { Link } from 'react-router-dom';
 
 class Game  extends PureComponent {
   constructor(props) {
     super(props);
 
+    const state = props.locationState
     this.state = {
       deck: [],
       dealer: null,
       player: null,
-      wallet: 0,
+      name: state? state.name : '',
+      wallet: state? state.wallet : 0,
       inputValue: '',
       currentBet: null,
       gameOver: false,
@@ -71,7 +74,7 @@ class Game  extends PureComponent {
         deck: updatedDeck,
         dealer,
         player,
-        wallet: 100,
+        // wallet: 100,
         inputValue: '',
         currentBet: null,
         gameOver: false,
@@ -261,11 +264,14 @@ class Game  extends PureComponent {
     }
 
     return (
+
       <div>
+        <h2>Good Luck, {this.state.name}!</h2>
         <div className="buttons">
           <button onClick={() => { this.startNewGame() }}>New Game</button>
           <button onClick={() => { this.hit() }}>Hit</button>
           <button onClick={() => { this.stand() }}>Stand</button>
+          <Link to='/'><button>Exit</button></Link>
         </div>
 
         <p>Wallet: ${ this.state.wallet }</p>

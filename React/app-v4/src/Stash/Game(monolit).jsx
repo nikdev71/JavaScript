@@ -252,6 +252,8 @@ class Game extends PureComponent {
           } else if (card1 === 'A') {
             dealerCount = 11;
           } else {
+            //надо вернуть если надо чтоб код работал
+            // eslint-disable-next-line no-unused-vars
             dealerCount = card1;
           }
         }
