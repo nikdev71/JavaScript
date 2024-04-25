@@ -92,27 +92,27 @@ class Game  extends PureComponent {
   placeBet() {
     const currentBet = this.state.inputValue;
 
-  if (currentBet > this.state.wallet) {
-    this.setState({ message: 'Недостаточно средств для такой ставки.' });
-  } else if (currentBet % 1 !== 0) {
-    this.setState({ message: 'Пожалуйста, делайте ставки целыми числами.' });
-  } else {
-    const wallet = this.state.wallet - currentBet;
+    if (currentBet > this.state.wallet) {
+      this.setState({ message: 'Недостаточно средств для такой ставки.' });
+    } else if (currentBet % 1 !== 0) {
+      this.setState({ message: 'Пожалуйста, делайте ставки целыми числами.' });
+    } else {
+      const wallet = this.state.wallet - currentBet;
 
-    const deck = (this.state.deck.length < 10) ? this.generateDeck() : this.state.deck;
+      const deck = (this.state.deck.length < 10) ? this.generateDeck() : this.state.deck;
 
-    const { updatedDeck, player, dealer } = this.dealCards(deck);
+      const { updatedDeck, player, dealer } = this.dealCards(deck);
 
-    this.setState({
-      deck: updatedDeck,
-      player,
-      dealer,
-      wallet,
-      currentBet,
-      gameOver: false,
-      message: null,
-    });
-  }
+      this.setState({
+        deck: updatedDeck,
+        player,
+        dealer,
+        wallet,
+        currentBet,
+        gameOver: false,
+        message: null,
+      });
+    }
   }
 
   hit() {
@@ -166,7 +166,6 @@ class Game  extends PureComponent {
 
   stand() {
     if (!this.state.gameOver) {
-      // Show dealer's 2nd card
       const randomCard = this.getRandomCard(this.state.deck);
       let deck = randomCard.updatedDeck;
       let dealer = this.state.dealer;
@@ -174,7 +173,6 @@ class Game  extends PureComponent {
       dealer.cards.push(randomCard.randomCard);
       dealer.count = this.getCount(dealer.cards);
 
-      // Keep drawing cards until count is 17 or more
       while (dealer.count < 17) {
         const draw = this.dealerDraw(dealer, deck);
         dealer = draw.dealer;
